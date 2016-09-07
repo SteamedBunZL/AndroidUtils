@@ -83,4 +83,13 @@ public class MainActivity extends BaseActivity {
         }
         return list;
     }
+
+    private void shortkeyTest(){
+            try {
+                int i = 10;
+                int j = 3;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
 }

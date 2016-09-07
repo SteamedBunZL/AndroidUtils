@@ -1,8 +1,10 @@
 package com.tcl.zhanglong.utils.Utils;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.text.TextUtils;
 
 /**
  * Package 相关工具类
@@ -31,5 +33,24 @@ public class PackageUtil {
     public static PackageInfo getPackageInfo(Context context,String apkPath){
         final PackageManager pm = context.getPackageManager();
         return pm.getPackageArchiveInfo(apkPath,0);
+    }
+
+    /**
+     * 判断一个APP是否已经安装，不要用getInstalled方法去判断，耗时
+     * @param context
+     * @param pkg
+     * @return
+     */
+    public static boolean isAppInstalled(Context context,String pkg){
+        boolean ret = true;
+        if(TextUtils.isEmpty(pkg)){
+            ret = false;
+        }
+        try {
+            context.getPackageManager().getPackageGids(pkg);
+        } catch (Exception e) {
+            ret = false;
+        }
+        return ret;
     }
 }
