@@ -1,18 +1,22 @@
-package com.tcl.zhanglong.utils;
+package com.tcl.zhanglong.utils.activity;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.tcl.zhanglong.utils.R;
 import com.tcl.zhanglong.utils.Utils.DebugLog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
 //    public static final Uri CONTENT_URI = Uri.parse("content://com.android.partnerbrowsercustomizations/homepage");
     public static final Uri CONTENT_URI = Uri.parse("content://com.android.chrome.browser/history");
@@ -24,6 +28,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+//        setSupportActionBar(toolbar);
+
+        toolbar.setTitle("MainActivity");
+
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(MainActivity.this,"TEST",Toast.LENGTH_SHORT);
+                return true;
+            }
+        });
+        toolbar.inflateMenu(R.menu.menu_main);
+//
         new Thread(){
             @Override
             public void run() {

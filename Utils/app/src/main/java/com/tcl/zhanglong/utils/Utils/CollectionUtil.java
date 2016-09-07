@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 集合相关的工具类
  * Created by Steve on 16/9/7.
  */
 public class CollectionUtil {

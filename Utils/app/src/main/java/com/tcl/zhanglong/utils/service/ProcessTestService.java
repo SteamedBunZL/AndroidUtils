@@ -1,4 +1,4 @@
-package com.tcl.zhanglong.utils;
+package com.tcl.zhanglong.utils.service;
 
 import android.app.Service;
 import android.content.Intent;
