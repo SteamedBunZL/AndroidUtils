@@ -5,7 +5,7 @@ android {
     buildToolsVersion "24.0.1"
 
     defaultConfig {
-        applicationId "com.tcl.zhanglong.utilsapplication"
+        applicationId "com.tcl.zhanglong.util"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -23,4 +23,27 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:24.1.1'
+}
+
+task hello {
+    println 'Hello, world!'
+
+    doLast{
+        println 'Goodbye'
+    }
+
+    getSomething()
+
+    doFirst{
+        println 'Helloc'
+    }
+}
+
+def getSomething(){
+    println "getSomething return value"
+    def aList = [5,'string',true];
+
+    aList[100] = 100
+
+    println aList.size()
 }

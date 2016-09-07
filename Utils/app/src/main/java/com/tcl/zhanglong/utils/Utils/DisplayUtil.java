@@ -1,4 +1,4 @@
-package com.tcl.zhanglong.utilsapplication.Utils;
+package com.tcl.zhanglong.utils.Utils;
 
 import android.content.Context;
 

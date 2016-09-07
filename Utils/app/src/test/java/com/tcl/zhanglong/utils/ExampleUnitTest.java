@@ -1,4 +1,4 @@
-package com.tcl.zhanglong.utilsapplication;
+package com.tcl.zhanglong.utils;
 
 import org.junit.Test;
 
