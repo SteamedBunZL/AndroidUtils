@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.tcl.zhanglong.testlib.HelloClass;
 import com.tcl.zhanglong.utils.R;
 import com.tcl.zhanglong.utils.Utils.DebugLog;
 
@@ -27,6 +28,7 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
 //        setSupportActionBar(toolbar);
@@ -68,7 +70,7 @@ public class MainActivity extends BaseActivity {
         List<String> list = new ArrayList<>();
         try {
             String[] projection = new String[] {
-                    "title"
+                    "url"
             };
             c = cr.query(CONTENT_URI, null, null, null, null);
             if (c == null) return list;
@@ -85,11 +87,19 @@ public class MainActivity extends BaseActivity {
     }
 
     private void shortkeyTest(){
+
+        //Surround with cmd + alt + T
             try {
                 int i = 10;
                 int j = 3;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+        //Unwrap shift + cmd + fn + delete
+
+        int i = 10;
+        int j = 3;
+
     }
 }
