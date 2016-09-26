@@ -53,4 +53,22 @@ public class PackageUtil {
         }
         return ret;
     }
+
+
+    /**
+     * 通过pkg 获取pakgeinfo
+     * @param context
+     * @param pkg
+     * @return
+     */
+    public static PackageInfo getPackageInfoByPkg(Context context,String pkg) {
+        PackageInfo info = null;
+        try {
+            PackageManager pm = context.getPackageManager();
+            info = pm.getPackageInfo(pkg,0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return info;
+    }
 }

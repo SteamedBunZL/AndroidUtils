@@ -30,33 +30,51 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-//        setSupportActionBar(toolbar);
-
-        toolbar.setTitle("MainActivity");
-
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(MainActivity.this,"TEST",Toast.LENGTH_SHORT);
-                return true;
-            }
-        });
-        toolbar.inflateMenu(R.menu.menu_main);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
+////        setSupportActionBar(toolbar);
 //
-        new Thread(){
-            @Override
-            public void run() {
-//                clearHistory(getContentResolver());
-                List<String> list = getVisitedHistory(getContentResolver());
+//        toolbar.setTitle("MainActivity");
+//
+//        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                Toast.makeText(MainActivity.this,"TEST",Toast.LENGTH_SHORT);
+//                return true;
+//            }
+//        });
+//        toolbar.inflateMenu(R.menu.menu_main);
+////
+//        new Thread(){
+//            @Override
+//            public void run() {
+////                clearHistory(getContentResolver());
+//                List<String> list = getVisitedHistory(getContentResolver());
+//
+//                DebugLog.w("list is %s",list);
+//
+//
+//            }
+//        }.start();
 
-                DebugLog.w("list is %s",list);
+//        List<String> list = testException();
 
 
-            }
-        }.start();
+    }
 
 
+    private List testException(){
+        List<String> list = new ArrayList<>();
+        try {
+            list.add("Hello");
+            list.get(3);
+        } catch (Exception e) {
+            DebugLog.e("走了上面");
+            e.printStackTrace();
+        }finally {
+            DebugLog.e("走了finallys");
+        }
+        DebugLog.e("走了下面");
+        return list;
     }
 
     private static void clearHistory(ContentResolver cr){
