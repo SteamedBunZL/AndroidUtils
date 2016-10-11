@@ -22,6 +22,12 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.FunctionListActivity"></activity>
+
+        <activity android:name=".activity.CustViewListActivity"></activity>
+
+        <activity android:name=".activity.customview.LitingColorFilterActivity"></activity>
+
         <service android:name=".service.ProcessTestService"></service>
     </application>
 

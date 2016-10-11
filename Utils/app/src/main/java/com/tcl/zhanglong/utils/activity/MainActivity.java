@@ -1,8 +1,14 @@
 package com.tcl.zhanglong.utils.activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -52,35 +58,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         queue = new PriorityBlockingQueue<>();
 
         dispatcher = new Dispatcher();
-
-
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-////        setSupportActionBar(toolbar);
-//
-//        toolbar.setTitle("MainActivity");
-//
-//        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                Toast.makeText(MainActivity.this,"TEST",Toast.LENGTH_SHORT);
-//                return true;
-//            }
-//        });
-//        toolbar.inflateMenu(R.menu.menu_main);
-////
-//        new Thread(){
-//            @Override
-//            public void run() {
-////                clearHistory(getContentResolver());
-//                List<String> list = getVisitedHistory(getContentResolver());
-//
-//                DebugLog.w("list is %s",list);
-//
-//
-//            }
-//        }.start();
-
-//        List<String> list = testException();
 
 
     }
@@ -176,12 +153,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.button2:
 //                if (dispatcher!=null)
 //                    dispatcher.start();
-                testException();
+//                testException();
+                Intent intent = new Intent(this,FunctionListActivity.class);
+                startActivity(intent);
                 break;
             case R.id.button3:
 //                if (dispatcher!=null)
 //                    dispatcher.quit();
-                testObject();
+//                testObject();
+
+                testNotification(this);
                 break;
         }
     }
@@ -219,5 +200,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
 
 
+    }
+
+    private void testNotification(Context context){
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+        Notification notification = builder
+                .setContentTitle("这是通知标题")
+                .setContentText("这是通知内容")
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.mipmap.ic_launcher)  //5.0  如果不设置小图标 会崩溃????
+//                .setLargeIcon(BitmapFactory.decodeResource(
+//                        getResources(), R.mipmap.ic_launcher))  //但是可以不设置大图标,哦哦,原来如此
+                .build();
+        manager.notify(1, notification);
     }
 }
