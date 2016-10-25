@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.tcl.zhanglong.testlib.HelloClass;
 import com.tcl.zhanglong.utils.R;
+import com.tcl.zhanglong.utils.Test;
 import com.tcl.zhanglong.utils.Utils.DebugLog;
 
 import java.util.ArrayList;
@@ -43,12 +44,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
 
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+    protected void init() {
+        super.init();
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
 
@@ -58,8 +56,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         queue = new PriorityBlockingQueue<>();
 
         dispatcher = new Dispatcher();
+    }
 
-
+    @Override
+    protected int getContentView() {
+        return R.layout.activity_main;
     }
 
 
@@ -154,15 +155,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 //                if (dispatcher!=null)
 //                    dispatcher.start();
 //                testException();
-                Intent intent = new Intent(this,FunctionListActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(this,FunctionListActivity.class);
+//                startActivity(intent);
+
+                new Test().sss();
                 break;
             case R.id.button3:
 //                if (dispatcher!=null)
 //                    dispatcher.quit();
 //                testObject();
 
-                testNotification(this);
+//                testNotification(this);
+                new Test().sss();
                 break;
         }
     }
@@ -215,4 +219,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 .build();
         manager.notify(1, notification);
     }
+
+
 }

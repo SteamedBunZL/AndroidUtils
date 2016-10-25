@@ -10,6 +10,7 @@
     <application
         android:name=".UtilApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
@@ -26,9 +27,12 @@
 
         <activity android:name=".activity.CustViewListActivity"></activity>
 
-        <activity android:name=".activity.customview.LitingColorFilterActivity"></activity>
+        <activity android:name=".activity.customview.LightingColorFilterActivity"></activity>
+
+        <activity android:name=".activity.customview.PorterDuffColorFilterActivity"></activity>
 
         <service android:name=".service.ProcessTestService"></service>
+
     </application>
 
 </manifest>

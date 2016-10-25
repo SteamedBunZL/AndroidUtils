@@ -4,6 +4,7 @@ import android.os.Environment;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +17,8 @@ import java.io.InputStreamReader;
  * Created by zhanglong on 16/8/30.
  */
 public class FileUtil {
+
+    private static final int BYTE_BUFFER_SIZE = 256;
 
     /**
      * 通用关闭流工具方法，优雅的关闭流
@@ -98,6 +101,47 @@ public class FileUtil {
                 isFileExits = file.createNewFile();
         }
         return isFileExits;
+    }
+
+    /**
+     * 把文件读到byte数组中
+     * @param file
+     * @return
+     */
+    public static byte[] readFile(String file) {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream(BYTE_BUFFER_SIZE);
+        byte[] buffer = new byte[BYTE_BUFFER_SIZE];
+        FileInputStream is = null;
+        try {
+            is = new FileInputStream(file);
+            int len = -1;
+            while ((len = is.read(buffer)) > 0) {
+                byteBuffer.write(buffer, 0, len);
+            }
+            is.close();
+        } catch (Exception e) {
+            return null;
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    /***
+     * 把file读到String中,设置终止字符
+     * @param file
+     * @param endBit
+     * @return
+     */
+    public static String readFile(String file, char endBit) {
+        byte[] b = readFile(file);
+        if (b == null){
+            return null;
+        }
+        for (int i = 0; i < b.length; i++) {
+            if (endBit == b[i]) {
+                return new String(b, 0, i);
+            }
+        }
+        return new String(b);
     }
 
 

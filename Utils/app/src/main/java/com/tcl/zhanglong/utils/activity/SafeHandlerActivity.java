@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.tcl.zhanglong.utils.R;
 
@@ -13,7 +14,7 @@ import java.lang.ref.WeakReference;
  * 线程安全的Handler
  * Created by Steve on 16/9/7.
  */
-public class SafeHandlerActivity extends BaseActivity{
+public class SafeHandlerActivity extends AppCompatActivity{
 
     private SafeHandler mHandler;
 

@@ -16,7 +16,7 @@ import com.tcl.zhanglong.utils.Utils.MeasureUtil;
  * Created by Steve on 16/10/11.
  */
 
-public class LitingColorFilter extends View {
+public class LightingColorFilterView extends View {
 
 
     private Paint mPaint;//画笔
@@ -30,12 +30,12 @@ public class LitingColorFilter extends View {
 
 
 
-    public LitingColorFilter(Context context) {
+    public LightingColorFilterView(Context context) {
         this(context,null);
     }
 
 
-    public LitingColorFilter(Context context, AttributeSet attrs) {
+    public LightingColorFilterView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
 
@@ -65,7 +65,7 @@ public class LitingColorFilter extends View {
     }
 
 
-    public LitingColorFilter(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LightingColorFilterView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

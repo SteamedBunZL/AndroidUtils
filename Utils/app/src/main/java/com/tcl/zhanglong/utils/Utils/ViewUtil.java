@@ -71,6 +71,9 @@ public class ViewUtil extends View{
         //设置颜色过滤
         mPaint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
 
+        //图像混合模式,有三个子类：AvoidXfermode, PixelXorXfermode和PorterDuffXfermode
+        //mPaint.setXfermode(Xfermode xfermode);
+
 
     }
 
