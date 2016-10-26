@@ -31,7 +31,14 @@
 
         <activity android:name=".activity.customview.PorterDuffColorFilterActivity"></activity>
 
+        <activity android:name=".activity.customview.ECGViewActivity"></activity>
+
         <service android:name=".service.ProcessTestService"></service>
+
+        <provider
+            android:name=".storage.sharedpreference.GlobalConfigProvider"
+            android:authorities="com.tcl.zhanglong.util.config"
+            android:exported="false" />
 
     </application>
 

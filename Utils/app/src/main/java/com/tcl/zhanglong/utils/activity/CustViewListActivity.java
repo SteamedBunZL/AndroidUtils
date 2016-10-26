@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tcl.zhanglong.utils.R;
+import com.tcl.zhanglong.utils.activity.customview.ECGViewActivity;
 import com.tcl.zhanglong.utils.activity.customview.LightingColorFilterActivity;
 import com.tcl.zhanglong.utils.activity.customview.PorterDuffColorFilterActivity;
 
@@ -22,7 +23,7 @@ import com.tcl.zhanglong.utils.activity.customview.PorterDuffColorFilterActivity
 
 public class CustViewListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
-    private String[] functionStr = {"LightingColorFilter","PorterDuffColorFilter"};
+    private String[] functionStr = {"LightingColorFilter","PorterDuffColorFilter","ECGView"};
 
     private FunctionCustomViewAdapter mAdapter;
     private ListView mListView;
@@ -47,6 +48,9 @@ public class CustViewListActivity extends AppCompatActivity implements AdapterVi
         }else if(function.equals("PorterDuffColorFilter")){
             Intent customViewIntent = new Intent(this,PorterDuffColorFilterActivity.class);
             startActivity(customViewIntent);
+        }else if (function.equals("ECGView")){
+            Intent ECGViewIntent = new Intent(this, ECGViewActivity.class);
+            startActivity(ECGViewIntent);
         }
     }
 

@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
 
 /**
  * Created by Steve on 16/10/25.
@@ -13,7 +12,7 @@ import android.support.v4.util.ArrayMap;
 
 public class GlobalConfigProvider extends ContentProvider{
 
-    public static final String URI_CONFIG = "content://com.hawk.security.config";
+    public static final String URI_CONFIG = "content://com.tcl.zhanglong.util.config";
 
     public static final String CONTENT_KEY = "config_key";
 

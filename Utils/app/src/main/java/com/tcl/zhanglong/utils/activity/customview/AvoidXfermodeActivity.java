@@ -1,6 +1,9 @@
 package com.tcl.zhanglong.utils.activity.customview;
 
-import com.tcl.zhanglong.utils.activity.BaseActivity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
+
 
 /**
  * 这个API因为不支持硬件加速在API 16已经过时了
@@ -17,9 +20,10 @@ import com.tcl.zhanglong.utils.activity.BaseActivity;
  * Created by Steve on 16/10/12.
  */
 
-public class AvoidXfermodeActivity extends BaseActivity{
+public class AvoidXfermodeActivity extends AppCompatActivity{
+
     @Override
-    protected int getContentView() {
-        return 0;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 }

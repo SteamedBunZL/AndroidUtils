@@ -5,13 +5,16 @@ import com.tcl.zhanglong.utils.Utils.DebugLog;
 import java.awt.font.TextAttribute;
 
 /**
+ * Test 测试类
  * Created by Steve on 16/10/19.
  */
 
 public class Test {
 
 
-
+    /**
+     * 方法可以锁传递,方法内调用方法
+     */
     public void sss(){
         synchronized (this){
             ss();
