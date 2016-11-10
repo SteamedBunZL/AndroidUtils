@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/zhanglong/AndroidStudioProjects/VirusEngineProject/virusengine/build/intermediates/res/merged/release/xml/url.xml",
+        "source": "/Users/zhanglong/AndroidStudioProjects/VirusEngineProject/virusengine/src/main/res/xml/url.xml"
+    },
+    {
+        "merged": "/Users/zhanglong/AndroidStudioProjects/VirusEngineProject/virusengine/build/intermediates/res/merged/release/xml/description_permission.xml",
+        "source": "/Users/zhanglong/AndroidStudioProjects/VirusEngineProject/virusengine/src/main/res/xml/description_permission.xml"
+    }
+]

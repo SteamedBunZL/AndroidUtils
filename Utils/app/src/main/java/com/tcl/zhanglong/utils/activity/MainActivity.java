@@ -2,6 +2,7 @@ package com.tcl.zhanglong.utils.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -85,9 +86,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.button3:
-
+                getAndroidId();
                 break;
         }
+    }
+
+    private String getAndroidId(){
+        String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+        DebugLog.e("Android Id %s",ANDROID_ID);
+        return ANDROID_ID;
     }
 
 
