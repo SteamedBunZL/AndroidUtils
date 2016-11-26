@@ -2,9 +2,11 @@ package com.tcl.zhanglong.utils.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,8 +14,10 @@ import android.widget.Toast;
 import com.tcl.zhanglong.utils.R;
 import com.tcl.zhanglong.utils.Utils.DebugLog;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -87,7 +91,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intent);
                 break;
             case R.id.button3:
-                getAndroidId();
+                //getAndroidId();
+                //Log.e("","===ZL lan : " + getLang() + ", country : " + getArea() + ", STR : " + Locale.getDefault().toString());
+                testListFiles();
                 break;
         }
     }
@@ -99,6 +105,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+    public static void testA(){
+        testB();
+    }
+
+    public static void testB(){
+        testc();
+    }
+
+    public static void testc(){
+        throw new IllegalStateException("test");
+    }
+
+
+    /**
+     * 获取当前系统语言
+     * @return
+     */
+    public static String getLang(){
+            Locale l = Locale.getDefault();
+            return l.getLanguage();
+    }
+
+    /**
+     * 获取国家
+     * @return
+     */
+    public static String getArea(){
+            Locale l = Locale.getDefault();
+            return l.getCountry();
+    }
+
+    public void testListFiles(){
+        new Thread(){
+            @Override
+            public void run() {
+                getAllFiles(new File(Environment.getExternalStorageDirectory().getPath()));
+            }
+        }.start();
+    }
+
+    private void getAllFiles(File root){
+        String root_path = root.getPath();
+        String fileNames[] = root.list();
+        if(fileNames != null){
+            File file = null;
+            for (String f : fileNames){
+                DebugLog.d("fileName : %s",root_path + "/" + f);
+                file = new File(root_path + "/" + f);
+                if (file.isDirectory()){
+                    getAllFiles(file);
+                }else{
+
+                }
+            }
+        }
+    }
 
 
 

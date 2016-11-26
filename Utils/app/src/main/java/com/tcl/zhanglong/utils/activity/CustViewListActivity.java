@@ -21,9 +21,9 @@ import com.tcl.zhanglong.utils.activity.customview.PorterDuffColorFilterActivity
  * Created by Steve on 16/10/11.
  */
 
-public class CustViewListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class CustViewListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private String[] functionStr = {"LightingColorFilter","PorterDuffColorFilter","ECGView"};
+    private String[] functionStr = {"LightingColorFilter", "PorterDuffColorFilter", "ECGView"};
 
     private FunctionCustomViewAdapter mAdapter;
     private ListView mListView;
@@ -37,18 +37,19 @@ public class CustViewListActivity extends AppCompatActivity implements AdapterVi
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
         mAdapter.notifyDataSetChanged();
+
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String function = functionStr[position];
-        if (function.equals("LightingColorFilter")){
-            Intent customViewIntent = new Intent(this,LightingColorFilterActivity.class);
+        if (function.equals("LightingColorFilter")) {
+            Intent customViewIntent = new Intent(this, LightingColorFilterActivity.class);
             startActivity(customViewIntent);
-        }else if(function.equals("PorterDuffColorFilter")){
-            Intent customViewIntent = new Intent(this,PorterDuffColorFilterActivity.class);
+        } else if (function.equals("PorterDuffColorFilter")) {
+            Intent customViewIntent = new Intent(this, PorterDuffColorFilterActivity.class);
             startActivity(customViewIntent);
-        }else if (function.equals("ECGView")){
+        } else if (function.equals("ECGView")) {
             Intent ECGViewIntent = new Intent(this, ECGViewActivity.class);
             startActivity(ECGViewIntent);
         }
@@ -75,12 +76,12 @@ public class CustViewListActivity extends AppCompatActivity implements AdapterVi
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
-            if (convertView == null){
+            if (convertView == null) {
                 holder = new ViewHolder();
-                convertView = LayoutInflater.from(CustViewListActivity.this).inflate(R.layout.function_item,null);
+                convertView = LayoutInflater.from(CustViewListActivity.this).inflate(R.layout.function_item, null);
                 holder.textView = (TextView) convertView.findViewById(R.id.textview);
                 convertView.setTag(holder);
-            }else{
+            } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
@@ -90,7 +91,7 @@ public class CustViewListActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    class ViewHolder{
+    class ViewHolder {
         TextView textView;
     }
 }
