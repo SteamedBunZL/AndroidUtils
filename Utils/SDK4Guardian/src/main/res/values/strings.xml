@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">virusengine</string>
-    <!--Suggest-->
-    <string name="suggest_common">Contains suspicious code</string>
-
-</resources>

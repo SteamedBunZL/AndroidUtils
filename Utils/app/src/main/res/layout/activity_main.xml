@@ -13,10 +13,24 @@
        />
 
     <Button
-        android:text="Button"
+        android:text="Test One"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button3"
+        />
+
+    <Button
+        android:text="Test Two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/button4"
+        />
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
         />
 
 

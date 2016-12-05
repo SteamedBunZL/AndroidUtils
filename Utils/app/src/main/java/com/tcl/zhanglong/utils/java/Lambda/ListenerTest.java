@@ -9,11 +9,11 @@ import android.widget.Toast;
  */
 
 public class ListenerTest {
-
-    public void listenerTest(Context context){
-
-        View view = new View(context);
-
-        view.setOnClickListener((v) -> Toast.makeText(context,"Button Clicked",Toast.LENGTH_SHORT).show());
-    }
+//
+//    public void listenerTest(Context context){
+//
+//        View view = new View(context);
+//
+//        view.setOnClickListener((v) -> Toast.makeText(context,"Button Clicked",Toast.LENGTH_SHORT).show());
+//    }
 }

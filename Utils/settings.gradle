@@ -1,1 +1,1 @@
-include ':app', ':SDK4Guardian'
+include ':app'

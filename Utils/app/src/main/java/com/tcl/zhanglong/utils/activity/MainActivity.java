@@ -1,12 +1,15 @@
 package com.tcl.zhanglong.utils.activity;
 
+import android.app.ActivityManagerNative;
+import android.app.IActivityManager;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -26,6 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button button3;
 
+    private Button button4;
+
+
+
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,22 +42,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
 
 
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
+        button4.setOnClickListener(this);
     }
 
     private List testException(){
         List<String> list = new ArrayList<>();
 
         try {
-            list.add("Hello");
-            list.get(0);
             DebugLog.e("正常走");
+            //list.get(0).equals("sss");
+            //return null;
         } catch (Exception e) {
             DebugLog.e("走了上面");
             e.printStackTrace();
+            DebugLog.w("return");
+            return null;
         }finally {
             DebugLog.e("走了finallys");
         }
@@ -93,7 +106,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button3:
                 //getAndroidId();
                 //Log.e("","===ZL lan : " + getLang() + ", country : " + getArea() + ", STR : " + Locale.getDefault().toString());
-                testListFiles();
+                //testListFiles();
+                break;
+            case R.id.button4:
+                //changeLan();
+                testException();
                 break;
         }
     }
@@ -102,6 +119,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String ANDROID_ID = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         DebugLog.e("Android Id %s",ANDROID_ID);
         return ANDROID_ID;
+    }
+
+    private void changeLan(){
+        IActivityManager iActMag = ActivityManagerNative.getDefault();
+        try {
+            Configuration config = iActMag.getConfiguration();
+            config.locale = Locale.CHINESE;
+            // 此处需要声明权限:android.permission.CHANGE_CONFIGURATION
+            // 会重新调用 onCreate();
+            iActMag.updateConfiguration(config);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 
 
