@@ -62,19 +62,31 @@ public class EventBus {
     private final HandlerPoster mainThreadPoster;
     private final BackgroundPoster backgroundPoster;
     private final AsyncPoster asyncPoster;
+    //订阅者响应函数信息存储和查找类，由 HashMap 缓存，以 ${subscriberClassName} 为 key
     private final SubscriberMethodFinder subscriberMethodFinder;
     private final ExecutorService executorService;
 
+    /**当调用事件处理函数异常时是否抛出异常，默认为 false*/
     private final boolean throwSubscriberException;
+
+    /**当调用事件处理函数异常时是否打印异常信息，默认为 true*/
     private final boolean logSubscriberExceptions;
+
+    /**当没有订阅者订阅该事件时是否打印日志，默认为 true*/
     private final boolean logNoSubscriberMessages;
+
+    /**当调用事件处理函数异常时是否发送 SubscriberExceptionEvent 事件*/
     private final boolean sendSubscriberExceptionEvent;
+
+    /**当没有事件处理函数对事件处理时是否发送 NoSubscriberEvent 事件*/
     private final boolean sendNoSubscriberEvent;
+
+    /**是否支持事件继承，默认为 true*/
     private final boolean eventInheritance;
 
     private final int indexCount;
 
-    /** Convenience singleton for apps using a process-wide EventBus instance. */
+    /** Double Check 的单例模式 */
     public static EventBus getDefault() {
         if (defaultInstance == null) {
             synchronized (EventBus.class) {
@@ -130,11 +142,15 @@ public class EventBus {
      * Subscribers have event handling methods that must be annotated by {@link Subscribe}.
      * The {@link Subscribe} annotation also allows configuration like {@link
      * ThreadMode} and priority.
+     *  1.查找注册的类中所有的事件处理函数（添加了@Subscribe注解且访问修饰符为public的方法）
+     *  2.将所有事件处理函数注册到EventBus
+     8  3.如果有事件处理函数设置了“sticky = true”，则立即处理该事件
      */
     public void register(Object subscriber) {
         Class<?> subscriberClass = subscriber.getClass();
         List<SubscriberMethod> subscriberMethods = subscriberMethodFinder.findSubscriberMethods(subscriberClass);
         synchronized (this) {
+            //找到事件处理函数后，会遍历找到的所有事件处理函数并调用subscribe方法将所有事件处理函数注册到EventBus中
             for (SubscriberMethod subscriberMethod : subscriberMethods) {
                 subscribe(subscriber, subscriberMethod);
             }
@@ -142,6 +158,12 @@ public class EventBus {
     }
 
     // Must be called in synchronized block
+
+    /**
+     * 订阅者订阅
+     * @param subscriber  订阅者
+     * @param subscriberMethod  订阅方法
+     */
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
         Class<?> eventType = subscriberMethod.eventType;
         Subscription newSubscription = new Subscription(subscriber, subscriberMethod);
@@ -150,12 +172,14 @@ public class EventBus {
             subscriptions = new CopyOnWriteArrayList<>();
             subscriptionsByEventType.put(eventType, subscriptions);
         } else {
+            //如果已经被注册过了,则抛出异常
             if (subscriptions.contains(newSubscription)) {
                 throw new EventBusException("Subscriber " + subscriber.getClass() + " already registered to event "
                         + eventType);
             }
         }
 
+        // 根据优先级将newSubscription插到合适位置 (扩展,如何根据优先级把一个数据插入已经存在的list中去??)
         int size = subscriptions.size();
         for (int i = 0; i <= size; i++) {
             if (i == size || subscriberMethod.priority > subscriptions.get(i).subscriberMethod.priority) {
@@ -164,6 +188,7 @@ public class EventBus {
             }
         }
 
+        //将处理事件类型添加到typesBySubscriber
         List<Class<?>> subscribedEvents = typesBySubscriber.get(subscriber);
         if (subscribedEvents == null) {
             subscribedEvents = new ArrayList<>();
@@ -171,6 +196,9 @@ public class EventBus {
         }
         subscribedEvents.add(eventType);
 
+
+        // 如果该事件处理方法为粘性事件，即设置了“sticky = true”，则需要调用checkPostStickyEventToSubscription
+        // 判断是否有粘性事件需要处理，如果需要处理则触发一次事件处理函数
         if (subscriberMethod.sticky) {
             if (eventInheritance) {
                 // Existing sticky events of all subclasses of eventType have to be considered.
@@ -178,6 +206,7 @@ public class EventBus {
                 // thus data structure should be changed to allow a more efficient lookup
                 // (e.g. an additional map storing sub classes of super classes: Class -> List<Class>).
                 Set<Map.Entry<Class<?>, Object>> entries = stickyEvents.entrySet();
+                //Set 也是可以用for-each遍历的
                 for (Map.Entry<Class<?>, Object> entry : entries) {
                     Class<?> candidateEventType = entry.getKey();
                     if (eventType.isAssignableFrom(candidateEventType)) {
@@ -192,6 +221,12 @@ public class EventBus {
         }
     }
 
+
+    /**
+     * 如果事件处理函数设置了“sticky = true”，则会调用checkPostStickyEventToSubscription处理粘性事件。
+     * @param newSubscription
+     * @param stickyEvent
+     */
     private void checkPostStickyEventToSubscription(Subscription newSubscription, Object stickyEvent) {
         if (stickyEvent != null) {
             // If the subscriber is trying to abort the event, it will fail (event is not tracked in posting state)

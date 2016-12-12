@@ -17,7 +17,10 @@ package org.greenrobot.eventbus;
 
 import java.lang.reflect.Method;
 
-/** Used internally by EventBus and generated subscriber indexes. */
+/**
+ * Used internally by EventBus and generated subscriber indexes.
+ * 订阅者事件响应函数信息
+ */
 public class SubscriberMethod {
     final Method method;
     final ThreadMode threadMode;
