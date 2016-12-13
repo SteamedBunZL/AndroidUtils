@@ -59,9 +59,12 @@ public class EventBus {
         }
     };
 
+    /**事件处理主线程*/
     private final HandlerPoster mainThreadPoster;
-    private final BackgroundPoster backgroundPoster;
+    /**事件异步线程处理*/
     private final AsyncPoster asyncPoster;
+    /**事件Backgroud处理*/
+    private final BackgroundPoster backgroundPoster;
     //订阅者响应函数信息存储和查找类，由 HashMap 缓存，以 ${subscriberClassName} 为 key
     private final SubscriberMethodFinder subscriberMethodFinder;
     private final ExecutorService executorService;
@@ -188,7 +191,7 @@ public class EventBus {
             }
         }
 
-        //将处理事件类型添加到typesBySubscriber
+        //将处理事件类型添加到typesBySubscriber,用于后续取消订阅
         List<Class<?>> subscribedEvents = typesBySubscriber.get(subscriber);
         if (subscribedEvents == null) {
             subscribedEvents = new ArrayList<>();
@@ -269,23 +272,31 @@ public class EventBus {
         }
     }
 
-    /** Posts the given event to the event bus. */
+    /** Posts the given event to the event bus.
+     * 1.将事件对象添加到事件队列eventQueue中等待处理
+     * 2.遍历eventQueue队列中的事件对象并调用postSingleEvent处理每个事件
+     * 3.找出订阅过该事件的所有事件处理函数，并在相应的线程中执行该事件处理函数
+     */
     public void post(Object event) {
         PostingThreadState postingState = currentPostingThreadState.get();
         List<Object> eventQueue = postingState.eventQueue;
         eventQueue.add(event);
 
+        // 没有事件正在POST
         if (!postingState.isPosting) {
+            // 标识post的线程是否是主线程
             postingState.isMainThread = Looper.getMainLooper() == Looper.myLooper();
             postingState.isPosting = true;
             if (postingState.canceled) {
                 throw new EventBusException("Internal error. Abort state was not reset");
             }
             try {
+                // 循环处理eventQueue中的每一个event对象
                 while (!eventQueue.isEmpty()) {
                     postSingleEvent(eventQueue.remove(0), postingState);
                 }
             } finally {
+                // 处理完之后重置postingState的一些标识信息
                 postingState.isPosting = false;
                 postingState.isMainThread = false;
             }
@@ -397,7 +408,8 @@ public class EventBus {
     private void postSingleEvent(Object event, PostingThreadState postingState) throws Error {
         Class<?> eventClass = event.getClass();
         boolean subscriptionFound = false;
-        if (eventInheritance) {
+        if (eventInheritance) {//是否支持事件继承,默认为true
+            // 如果允许事件继承，则会调用lookupAllEventTypes查找所有的父类和接口类
             List<Class<?>> eventTypes = lookupAllEventTypes(eventClass);
             int countTypes = eventTypes.size();
             for (int h = 0; h < countTypes; h++) {
@@ -413,6 +425,7 @@ public class EventBus {
             }
             if (sendNoSubscriberEvent && eventClass != NoSubscriberEvent.class &&
                     eventClass != SubscriberExceptionEvent.class) {
+                // 如果post的事件没有被注册，则post一个NoSubscriberEvent事件
                 post(new NoSubscriberEvent(this, event));
             }
         }
@@ -445,12 +458,24 @@ public class EventBus {
         return false;
     }
 
+    /**
+     * 如果是sticky事件,立即处理????
+     * 判断当前线程是否是MainThread
+     * @param subscription
+     * @param event
+     * @param isMainThread
+     */
     private void postToSubscription(Subscription subscription, Object event, boolean isMainThread) {
         switch (subscription.subscriberMethod.threadMode) {
             case POSTING:
+                // 如果该事件处理函数没有指定线程模型或者线程模型为PostThread
+                // 则调用invokeSubscriber在post的线程中执行事件处理函数
                 invokeSubscriber(subscription, event);
                 break;
             case MAIN:
+                // 如果该事件处理函数指定的线程模型为MainThread
+                // 并且当前post的线程为主线程，则调用invokeSubscriber在当前线程（主线程）中执行事件处理函数
+                // 如果post的线程不是主线程，将使用mainThreadPoster.enqueue该事件处理函数添加到主线程的消息队列中
                 if (isMainThread) {
                     invokeSubscriber(subscription, event);
                 } else {
@@ -458,6 +483,9 @@ public class EventBus {
                 }
                 break;
             case BACKGROUND:
+                // 如果该事件处理函数指定的线程模型为BackgroundThread
+                // 并且当前post的线程为主线程，则调用backgroundPoster.enqueue
+                // 如果post的线程不是主线程，则调用invokeSubscriber在当前线程（非主线程）中执行事件处理函数
                 if (isMainThread) {
                     backgroundPoster.enqueue(subscription, event);
                 } else {
@@ -465,6 +493,7 @@ public class EventBus {
                 }
                 break;
             case ASYNC:
+                //添加到异步线程队列中
                 asyncPoster.enqueue(subscription, event);
                 break;
             default:
@@ -473,6 +502,7 @@ public class EventBus {
     }
 
     /** Looks up all Class objects including super classes and interfaces. Should also work for interfaces. */
+    //如果允许事件继承，则会调用lookupAllEventTypes查找所有的父类和接口类
     private static List<Class<?>> lookupAllEventTypes(Class<?> eventClass) {
         synchronized (eventTypesCache) {
             List<Class<?>> eventTypes = eventTypesCache.get(eventClass);

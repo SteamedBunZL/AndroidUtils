@@ -213,19 +213,20 @@ class SubscriberMethodFinder {
         for (Method method : methods) {
             //获取方法修饰符
             int modifiers = method.getModifiers();
-            //判断修饰符是public,并且不是抽象、静态、同步、bridge方法
+            //1.判断修饰符是public,并且不是抽象、静态、同步、bridge方法
             if ((modifiers & Modifier.PUBLIC) != 0 && (modifiers & MODIFIERS_IGNORE) == 0) {
                 //方法参数--泛型
                 Class<?>[] parameterTypes = method.getParameterTypes();
-                //参数个数为1个
+                //2.参数个数为1个
                 if (parameterTypes.length == 1) {
                     //获取方法上Subsribe注解
                     Subscribe subscribeAnnotation = method.getAnnotation(Subscribe.class);
                     if (subscribeAnnotation != null) {
                         Class<?> eventType = parameterTypes[0];
                         if (findState.checkAdd(method, eventType)) {
-                            //获取线程模式
+                            //3.获取线程模式
                             ThreadMode threadMode = subscribeAnnotation.threadMode();
+                            //4.存入到arraylist中
                             findState.subscriberMethods.add(new SubscriberMethod(method, eventType, threadMode,
                                     subscribeAnnotation.priority(), subscribeAnnotation.sticky()));
                         }

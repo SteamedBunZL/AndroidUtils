@@ -15,8 +15,13 @@
  */
 package org.greenrobot.eventbus;
 
+/***
+ * 订阅者信息
+ */
 final class Subscription {
+    //订阅者对象
     final Object subscriber;
+    //事件响应方法
     final SubscriberMethod subscriberMethod;
     /**
      * Becomes false as soon as {@link EventBus#unregister(Object)} is called, which is checked by queued event delivery

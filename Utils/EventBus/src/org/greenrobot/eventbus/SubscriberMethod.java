@@ -22,13 +22,19 @@ import java.lang.reflect.Method;
  * 订阅者事件响应函数信息
  */
 public class SubscriberMethod {
+
+    /**响应方法*/
     final Method method;
+
+    /**线程Mode*/
     final ThreadMode threadMode;
+
+    //事件类型
     final Class<?> eventType;
     final int priority;
     final boolean sticky;
     /** Used for efficient comparison */
-    String methodString;
+    String methodString;//用于比较SubscriberMethod是否相等的特征值
 
     public SubscriberMethod(Method method, Class<?> eventType, ThreadMode threadMode, int priority, boolean sticky) {
         this.method = method;
