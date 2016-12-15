@@ -14,14 +14,24 @@ import java.lang.ref.WeakReference;
  * 线程安全的Handler
  * Created by Steve on 16/9/7.
  */
-public class SafeHandlerActivity extends AppCompatActivity{
+public class SafeHandlerActivity extends BaseActivity{
 
     private SafeHandler mHandler;
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        setContentView(R.layout.activity_main);
+    protected int getContentViewId() {
+        return R.layout.activity_main;
+    }
+
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initData() {
         mHandler = new SafeHandler(this);
     }
 

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends BaseActivity implements View.OnClickListener{
 
 
     private Button button2;
@@ -33,13 +33,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    @Override
+    protected int getContentViewId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void initData() {
+
+    }
 
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected void initView() {
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
@@ -49,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
     }
+
 
     private List testException(){
         List<String> list = new ArrayList<>();

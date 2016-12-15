@@ -35,6 +35,47 @@
 
         <activity android:name=".activity.customview.ECGViewActivity"></activity>
 
+        <activity android:name=".activity.launchmode.LaunchModeActivity"></activity>
+
+        <activity android:name=".activity.launchmode.SingleTaskActivity"
+            android:launchMode="singleTask"
+            ></activity>
+
+        <activity android:name=".activity.launchmode.StandardActivity"></activity>
+
+        <activity android:name=".activity.launchmode.ActivityA"
+            ></activity>
+
+        <activity android:name=".activity.launchmode.ActivityB"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.zl.task1"
+            ></activity>
+
+        <activity android:name=".activity.launchmode.ActivityC"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.zl.task1"
+            ></activity>
+
+        <activity android:name=".activity.launchmode.SingleInstanceActivity"
+            android:launchMode="singleInstance"
+            ></activity>
+
+        <activity android:name=".activity.launchmode.ActivityD"
+            ></activity>
+
+        <activity android:name=".activity.intentfilter.IntentfilterActivity"></activity>
+
+        <activity android:name=".activity.intentfilter.ActionActivity"></activity>
+
+        <activity android:name=".activity.intentfilter.ActionAActivity">
+            <intent-filter>
+                <action android:name="com.util.actionaaction"/>
+                <action android:name="com.util.actionaaction1"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="com.util.category1"/>
+            </intent-filter>
+        </activity>
+
         <service android:name=".service.ProcessTestService"></service>
 
         <provider

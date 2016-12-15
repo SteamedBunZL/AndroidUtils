@@ -15,6 +15,8 @@
  */
 package org.greenrobot.eventbus;
 
+import static javax.print.attribute.standard.MediaTray.MAIN;
+
 /**
  * Each event handler method has a thread mode, which determines in which thread the method is to be called by EventBus.
  * EventBus takes care of threading independently from the posting thread.
