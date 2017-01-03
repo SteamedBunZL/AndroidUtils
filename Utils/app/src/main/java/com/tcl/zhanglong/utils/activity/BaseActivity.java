@@ -19,7 +19,7 @@ public abstract class BaseActivity extends AppCompatActivity{
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //日志输出每个activity的名字
-        DebugLog.i("BaseActivity :%s",getClass().getSimpleName());
+        DebugLog.i("%s",getClass().getSimpleName());
         setContentView(getContentViewId());
         initData();
         initView();

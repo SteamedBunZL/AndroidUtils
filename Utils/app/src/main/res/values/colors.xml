@@ -3,4 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="blue_button">#2DABE0</color>
+    <color name="blue_button_hover">#409CC7</color>
+    <color name="gray_e8">#E8E8EB</color>
 </resources>

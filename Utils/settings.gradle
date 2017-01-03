@@ -1,1 +1,1 @@
-include ':app', ':EventBus'
+include ':app', ':EventBus', ':picasso'

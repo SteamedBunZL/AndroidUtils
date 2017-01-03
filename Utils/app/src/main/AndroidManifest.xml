@@ -24,10 +24,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ui.UIListActivity"></activity>
+
+        <activity android:name=".activity.ui.material_design.MaterailDesignActivity"
+            android:theme="@style/MaterailDesignTheme"
+            android:label="MaTerailDesignActivity"
+            ></activity>
 
         <activity android:name=".activity.FunctionListActivity"></activity>
 
-        <activity android:name=".activity.CustViewListActivity"></activity>
+        <activity android:name=".activity.ui.CustViewListActivity"></activity>
 
         <activity android:name=".activity.customview.LightingColorFilterActivity"></activity>
 
@@ -76,7 +82,28 @@
             </intent-filter>
         </activity>
 
+
+        <activity android:name=".IPC.IPCActivityA"
+            android:process=":remote"
+            ></activity>
+
+        <activity android:name=".IPC.IPCActivityB"
+            android:process="com.zzzl.remote"
+            ></activity>
+
+        <activity android:name=".IPC_Messenger.MessengerActivity"></activity>
+
+        <activity android:name=".opengl.OpenGlListActivity"></activity>
+
+        <activity android:name=".opengl.FirstOpenGlActivity"></activity>
+
+        <activity android:name=".opengl_new.GL_Demo"></activity>
+
         <service android:name=".service.ProcessTestService"></service>
+
+        <service android:name=".IPC_Messenger.MessengerService"
+            android:process=":remote"
+            ></service>
 
         <provider
             android:name=".storage.sharedpreference.GlobalConfigProvider"

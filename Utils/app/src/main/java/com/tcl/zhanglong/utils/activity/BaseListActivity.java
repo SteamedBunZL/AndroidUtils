@@ -13,13 +13,14 @@ import android.widget.Toast;
 import com.tcl.zhanglong.utils.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by Steve on 16/12/15.
  */
 
-public class BaseListActivity extends BaseActivity implements AdapterView.OnItemClickListener{
+public abstract class BaseListActivity extends BaseActivity implements AdapterView.OnItemClickListener{
 
     protected List<String> functionArray = new ArrayList<>();
 
@@ -33,8 +34,10 @@ public class BaseListActivity extends BaseActivity implements AdapterView.OnItem
 
     @Override
     protected void initData() {
-
+        functionArray.addAll(Arrays.asList(getFuncStrArray()));
     }
+
+    protected abstract String[] getFuncStrArray();
 
     @Override
     protected void initView() {
