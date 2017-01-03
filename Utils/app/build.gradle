@@ -1,20 +1,17 @@
 apply plugin: 'com.android.application'
 
 
+
 android {
-    compileSdkVersion 24
-    buildToolsVersion '24.0.1'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.tcl.zhanglong.util"
-        minSdkVersion 15
-        targetSdkVersion 24
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-//        jackOptions {
-//            enabled true
-//        }
-
     }
     buildTypes {
         release {
@@ -23,20 +20,13 @@ android {
         }
     }
 
-//    compileOptions {
-//        sourceCompatibility JavaVersion.VERSION_1_8
-//        targetCompatibility JavaVersion.VERSION_1_8
-//    }
+
 }
 
 
 dependencies {
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.robolectric:robolectric:3.1.2'
-    testCompile 'org.mockito:mockito-core:1.9.5'
-    compile 'com.android.support:appcompat-v7:24.0.1'
-    compile 'com.stevezhang.library:testlib:0.0.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    compile dep.okhttp
+    compile dep.support
     provided files('libs/layoutlib.jar')
 }
 

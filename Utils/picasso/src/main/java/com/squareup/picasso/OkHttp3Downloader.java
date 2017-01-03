@@ -17,8 +17,6 @@ package com.squareup.picasso;
 
 import android.content.Context;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
 
 import java.io.File;
 import java.io.IOException;
@@ -90,11 +88,11 @@ public final class OkHttp3Downloader implements Downloader {
     this.cache = null;
   }
 
-  @VisibleForTesting Cache getCache() {
+  Cache getCache() {
     return ((OkHttpClient) client).cache();
   }
 
-  @Override public Response load(@NonNull Uri uri, int networkPolicy) throws IOException {
+  @Override public Response load(Uri uri, int networkPolicy) throws IOException {
     CacheControl cacheControl = null;
     if (networkPolicy != 0) {
       if (NetworkPolicy.isOfflineOnly(networkPolicy)) {
