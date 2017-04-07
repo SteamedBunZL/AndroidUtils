@@ -22,17 +22,31 @@ public class ThreadPoolUtil {
 
     private ThreadPoolExecutor pool = null;
 
-    private static final int CORE_POOL_SIZE = 0;
+    private static final int CORE_POOL_SIZE = 3;
 
     private static final int MAXIUM_POOL_SIZE = 3;
 
-    private static final int KEEP_ALIVE_TIME = 5;
+    private static final int KEEP_ALIVE_TIME = 1;
 
     private static final int BLOCKING_QUEUE_SIZE =5;
 
 
+    private static volatile ThreadPoolUtil ins;
 
-    public ThreadPoolUtil(){
+    public static ThreadPoolUtil getIns(){
+        if (ins == null){
+            synchronized (ThreadPoolUtil.class){
+                if (ins ==null){
+                    ins = new ThreadPoolUtil() ;
+                }
+            }
+        }
+        return ins;
+    }
+
+
+
+    private ThreadPoolUtil(){
         pool = new ThreadPoolExecutor(CORE_POOL_SIZE,MAXIUM_POOL_SIZE,KEEP_ALIVE_TIME, TimeUnit.MINUTES,new ArrayBlockingQueue<Runnable>(BLOCKING_QUEUE_SIZE),new CustomFactory(),new CustomRejectHandler());
     }
 

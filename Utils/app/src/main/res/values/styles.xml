@@ -31,5 +31,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#FFCCCC</item>
+        <item name="colorPrimaryDark">#FF00FF</item>
+
+    </style>
+
 
 </resources>

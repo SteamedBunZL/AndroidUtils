@@ -1,0 +1,38 @@
+import groovy.util.XmlSlurper
+
+def copyFile(String srcFile,dstFile){
+    //拷贝文件函数，用于将最后的生成物拷贝到指定的目录
+}
+
+def rmFile(String targetFile){
+    //删除指定目录中的文件
+}
+
+def getVersionNameAdvanced(){
+    def xmlFile = project.file("AndrodiManifest.xml")
+    def rootManifest = new XmlSlurper().parse(xmlFile)
+    return rootManifest['@android:versionName']
+}
+
+
+def diableDebugBuild(){
+    //返回值保存在targetTasks容器中
+    def targetTasks = project.tasks.findAll { task ->
+        task.name.contains("Debug")
+    }
+
+    targetTasks.each {
+        println("diable debug task :${it.name}")
+        it.setEnabled(false)
+    }
+}
+
+ext{
+    copyFile                    = this.&copyFile
+    rmFile                      = this.&rmFile
+    getVersionNameAdvanced      = this.&getVersionNameAdvanced
+    diableDebugBuild            = this.&diableDebugBuild
+}
+
+
+

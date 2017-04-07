@@ -24,9 +24,18 @@ android {
 }
 
 
+apply plugin: 'com.neenbedankt.android-apt'//Butterknife 增加这一句
+
+apply plugin: 'com.android.databinding'//databinding 增加这一句
+
 dependencies {
     compile dep.okhttp
     compile dep.support
+    compile dep.butterknife//Butterknife 增加这一句
+    apt dep.butterknifeApt//Butterknife 增加这句
+    compile dep.circleimageview
+    compile dep.cardview
+    compile dep.design
     provided files('libs/layoutlib.jar')
 }
 
@@ -44,11 +53,29 @@ task hello {
     }
 }
 
+def variable = 1
+def varable = 2
+
 def getSomething(){
     println "getSomething return value"
     def aList = [5,'string',true];
 
     aList[100] = 100
 
+    def int x = 1
+
+    println(x.getClass().getCanonicalName())
+
     println aList.size()
+
+    def aNewMap = [key1:"value",key2:true]
+
+    println aNewMap.key1
+
+    def aRange = 1..5
+    def aRangeWithoutEnd = 1..<5
+    println aRange.from
+    println aRange.to
+
+
 }

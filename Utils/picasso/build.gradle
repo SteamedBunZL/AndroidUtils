@@ -24,6 +24,7 @@ android {
 dependencies {
   provided dep.okhttp
   provided dep.okhttp3
+  compile dep.supportAnnotations
   testCompile dep.robolectric
   testCompile dep.mockito
   testCompile dep.mockWebServer

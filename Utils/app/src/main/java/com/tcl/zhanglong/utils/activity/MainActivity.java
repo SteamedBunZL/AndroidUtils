@@ -4,32 +4,36 @@ import android.app.ActivityManagerNative;
 import android.app.IActivityManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.os.Bundle;
 import android.os.Environment;
 import android.os.RemoteException;
 import android.provider.Settings;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.tcl.zhanglong.utils.R;
 import com.tcl.zhanglong.utils.Utils.DebugLog;
+import com.tcl.zhanglong.utils.Utils.ThreadPoolUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
+    @BindView(R.id.button2)
+    Button button2;
 
-    private Button button2;
+    @BindView(R.id.button3)
+    Button button3;
 
-    private Button button3;
-
-    private Button button4;
+    @BindView(R.id.button4)
+    Button button4;
 
 
 
@@ -47,10 +51,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void initView() {
-        button2 = (Button) findViewById(R.id.button2);
-        button3 = (Button) findViewById(R.id.button3);
-        button4 = (Button) findViewById(R.id.button4);
-
+        ButterKnife.bind(this);
 
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
@@ -107,9 +108,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button2:
-                Toast.makeText(this,"Start Function",Toast.LENGTH_SHORT).show();
-                Intent intent  = new Intent(this,FunctionListActivity.class);
-                startActivity(intent);
+//                Toast.makeText(this,"Start Function",Toast.LENGTH_SHORT).show();
+//                Intent intent  = new Intent(this,FunctionListActivity.class);
+//                startActivity(intent);
+                for(int i = 0;i<10;i++){
+                    ThreadPoolUtil.getIns().getThreadPoolExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                DebugLog.e("One Thread is running");
+                                Thread.sleep(5000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
                 break;
             case R.id.button3:
                 //getAndroidId();

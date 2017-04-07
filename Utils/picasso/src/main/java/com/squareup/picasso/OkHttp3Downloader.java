@@ -92,7 +92,8 @@ public final class OkHttp3Downloader implements Downloader {
     return ((OkHttpClient) client).cache();
   }
 
-  @Override public Response load(Uri uri, int networkPolicy) throws IOException {
+  @Override
+  public Response load(Uri uri, int networkPolicy) throws IOException {
     CacheControl cacheControl = null;
     if (networkPolicy != 0) {
       if (NetworkPolicy.isOfflineOnly(networkPolicy)) {
@@ -128,7 +129,8 @@ public final class OkHttp3Downloader implements Downloader {
     return new Response(responseBody.byteStream(), fromCache, responseBody.contentLength());
   }
 
-  @Override public void shutdown() {
+  @Override
+  public void shutdown() {
     if (!sharedClient) {
       if (cache != null) {
         try {
