@@ -161,6 +161,7 @@ class BitmapHunter implements Runnable {
 
   @Override public void run() {
     try {
+      //更新当前线程的名字
       updateThreadName(data);
 
       if (picasso.loggingEnabled) {
@@ -169,11 +170,14 @@ class BitmapHunter implements Runnable {
 
       result = hunt();
 
+      //如果为空,调用dispatcher发送失败的消息,
+      //如果不为空则发送完成的消息
       if (result == null) {
         dispatcher.dispatchFailed(this);
       } else {
         dispatcher.dispatchComplete(this);
       }
+      //通过不同的异常来进行对应的处理
     } catch (Downloader.ResponseException e) {
       if (!e.localCacheOnly || e.responseCode != 504) {
         exception = e;
@@ -213,7 +217,10 @@ class BitmapHunter implements Runnable {
       }
     }
 
+    //如果未设置networkPolicy并且retryCount为0,则将networkPolicy设置为
+    //NetworkPolicy.OFFLINE
     data.networkPolicy = retryCount == 0 ? NetworkPolicy.OFFLINE.index : networkPolicy;
+    //通过对应的requestHandler来获取result
     RequestHandler.Result result = requestHandler.load(data, networkPolicy);
     if (result != null) {
       loadedFrom = result.getLoadedFrom();

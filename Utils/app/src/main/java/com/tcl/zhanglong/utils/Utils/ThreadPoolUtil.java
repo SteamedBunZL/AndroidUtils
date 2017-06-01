@@ -22,9 +22,9 @@ public class ThreadPoolUtil {
 
     private ThreadPoolExecutor pool = null;
 
-    private static final int CORE_POOL_SIZE = 3;
+    private static final int CORE_POOL_SIZE = 0;
 
-    private static final int MAXIUM_POOL_SIZE = 3;
+    private static final int MAXIUM_POOL_SIZE = 5;
 
     private static final int KEEP_ALIVE_TIME = 1;
 

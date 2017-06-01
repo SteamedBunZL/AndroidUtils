@@ -136,6 +136,12 @@
             android:authorities="com.tcl.zhanglong.util.config"
             android:exported="false" />
 
+        <service android:name=".binderpool.ScanService"
+            android:process=":scan"
+            ></service>
+
+        <activity android:name=".binderpool.ScanActivity"></activity>
+
     </application>
 
 </manifest>

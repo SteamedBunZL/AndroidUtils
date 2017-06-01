@@ -13,7 +13,7 @@ public class CollectionUtil {
 
     /**
      * 最有效率的遍历集合
-     * @param map
+     * @param
      */
     public static void transformingMap(){
         HashMap<String,String> map = new HashMap<>();

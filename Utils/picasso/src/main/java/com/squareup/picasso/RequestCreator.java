@@ -683,47 +683,58 @@ public class RequestCreator {
    */
   public void into(ImageView target, Callback callback) {
     long started = System.nanoTime();
-    checkMain();
+    checkMain();//检查主线程
 
     if (target == null) {
       throw new IllegalArgumentException("Target must not be null.");
     }
 
-    if (!data.hasImage()) {
+    if (!data.hasImage()) {//如果没有设置需要加载的uri,或者resourceId
       picasso.cancelRequest(target);
-      if (setPlaceholder) {
+      if (setPlaceholder) {//如果设置占位图片,直接加载并返回
         setPlaceholder(target, getPlaceholderDrawable());
       }
       return;
     }
 
-    if (deferred) {
-      if (data.hasSize()) {
+    if (deferred) {//如果是延时加载,也就是选择了fit()模式
+      if (data.hasSize()) {//fit()模式是适应target的宽高加载,所以并不能手动设置resize,如果设置就抛出异常
         throw new IllegalStateException("Fit cannot be used with resize.");
       }
       int width = target.getWidth();
       int height = target.getHeight();
-      if (width == 0 || height == 0 || target.isLayoutRequested()) {
+      if (width == 0 || height == 0 || target.isLayoutRequested()) { //如果目标ImageView的宽或高现在为0
         if (setPlaceholder) {
           setPlaceholder(target, getPlaceholderDrawable());
         }
+        //监听ImageView的ViewTreeObserver.OnPreDrawListener接口,一旦ImageView
+        //的宽高被赋值,就按照ImageView的宽高继续加载.
         picasso.defer(target, new DeferredRequestCreator(this, target, callback));
         return;
       }
+      //如果ImageView有宽高就设置设置
       data.resize(width, height);
     }
 
+    //构建Request
     Request request = createRequest(started);
+    //构建requestKey
     String requestKey = createKey(request);
 
+    //根据memoryPolicy来决定是否可以从内存里读取
     if (shouldReadFromMemoryCache(memoryPolicy)) {
+      //通过LruCache来读取内存里的缓存图片
       Bitmap bitmap = picasso.quickMemoryCacheCheck(requestKey);
+      //如果读取到
       if (bitmap != null) {
+        //取消target的request
         picasso.cancelRequest(target);
+        //设置图片
         setBitmap(target, picasso.context, bitmap, MEMORY, noFade, picasso.indicatorsEnabled);
         if (picasso.loggingEnabled) {
           log(OWNER_MAIN, VERB_COMPLETED, request.plainId(), "from " + MEMORY);
         }
+        //如果设置了回调接口就回调接口的方法.
         if (callback != null) {
           callback.onSuccess();
         }
@@ -731,14 +742,17 @@ public class RequestCreator {
       }
     }
 
+    //如果缓存里没读到,先根据是否设置了占位图并设置占位
     if (setPlaceholder) {
       setPlaceholder(target, getPlaceholderDrawable());
     }
 
+    //构建一个Action对象,由于我们是往ImageView里加载图片,所以这里创建的是一个ImageViewAction对象.
     Action action =
         new ImageViewAction(picasso, target, request, memoryPolicy, networkPolicy, errorResId,
             errorDrawable, requestKey, tag, callback, noFade);
 
+    //将Action对象入列提交
     picasso.enqueueAndSubmit(action);
   }
 

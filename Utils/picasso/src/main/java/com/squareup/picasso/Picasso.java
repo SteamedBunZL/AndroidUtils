@@ -507,11 +507,13 @@ public class Picasso {
 
   void enqueueAndSubmit(Action action) {
     Object target = action.getTarget();
+    //取消这个target已经有的action.
     if (target != null && targetToAction.get(target) != action) {
       // This will also check we are on the main thread.
       cancelExistingRequest(target);
       targetToAction.put(target, action);
     }
+    //提交action
     submit(action);
   }
 
@@ -879,15 +881,15 @@ public class Picasso {
       if (cache == null) {
         cache = new LruCache(context);
       }
-      if (service == null) {
+      if (service == null) {//创建线程池,默认有3个执行线程,会根据网络状况自动切换线程数
         service = new PicassoExecutorService();
       }
       if (transformer == null) {
         transformer = RequestTransformer.IDENTITY;
       }
-
+      //创建stats用于统计缓存,以及缓存命中率,下载数量等等
       Stats stats = new Stats(cache);
-
+      //创建dispatcher对象用于任务的调度
       Dispatcher dispatcher = new Dispatcher(context, service, HANDLER, downloader, cache, stats);
 
       return new Picasso(context, dispatcher, cache, listener, transformer, requestHandlers, stats,

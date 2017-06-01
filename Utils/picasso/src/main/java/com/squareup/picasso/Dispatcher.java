@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED;
@@ -185,6 +186,9 @@ class Dispatcher {
       return;
     }
 
+    //通过action的key来在hunterMap查找是否有相同的hunter,这个key里保存的是我们
+    //的uri或者resourceId和一些参数,如果都是一样就将这些action合并到一个
+    //BitmapHunter里去.
     BitmapHunter hunter = hunterMap.get(action.getKey());
     if (hunter != null) {
       hunter.attach(action);
@@ -198,8 +202,11 @@ class Dispatcher {
       return;
     }
 
+    //创建BitmapHunter对象
     hunter = forRequest(action.getPicasso(), this, cache, stats, action);
+    //通过service执行hunter并返回一个future对象
     hunter.future = service.submit(hunter);
+    //将hunter添加到hunterMap中
     hunterMap.put(action.getKey(), hunter);
     if (dismissFailed) {
       failedActions.remove(action.getTarget());

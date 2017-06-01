@@ -1,6 +1,8 @@
 package com.tcl.zhanglong.utils.Utils;
 
+import android.annotation.TargetApi;
 import android.os.Environment;
+import android.os.StatFs;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +13,9 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import static android.os.Build.VERSION.SDK_INT;
+import static android.os.Build.VERSION_CODES.JELLY_BEAN_MR2;
 
 /**
  * 文件工具类
@@ -142,6 +147,30 @@ public class FileUtil {
             }
         }
         return new String(b);
+    }
+
+    /**
+     * 获取file 总空间大小 方法来自picasso
+     * @param dir
+     * @return
+     */
+    @TargetApi(JELLY_BEAN_MR2)
+    public static long calculateDiskCacheSize(File dir) {
+        try {
+            StatFs statFs = new StatFs(dir.getAbsolutePath());
+            //noinspection deprecation
+            long blockCount =
+                    SDK_INT < JELLY_BEAN_MR2 ? (long) statFs.getBlockCount() : statFs.getBlockCountLong();
+            //noinspection deprecation
+            long blockSize =
+                    SDK_INT < JELLY_BEAN_MR2 ? (long) statFs.getBlockSize() : statFs.getBlockSizeLong();
+            long available = blockCount * blockSize;
+            // Target 2% of the total space.
+            return available;
+        } catch (IllegalArgumentException ignored) {
+        }
+
+        return 0L;
     }
 
 
