@@ -13,6 +13,8 @@ public class ADB {
     //2.查看activity 栈
     //adb shell dumpsys activity
 
+    //3.wwww
+
 
 
 
