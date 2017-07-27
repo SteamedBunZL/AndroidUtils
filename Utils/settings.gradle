@@ -1,1 +1,1 @@
-include ':app', ':picasso', ':volley', ':lottie'
+include ':app', ':picasso', ':volley', ':lottie', ':shimmer-android', ':logger'

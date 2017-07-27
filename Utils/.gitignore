@@ -6,3 +6,9 @@
 .DS_Store
 /build
 /captures
+/shimmer-android/build/
+app/src/main/aidl/com/tcl/zhanglong/com/
+java_pid1610.hprof
+java_pid1630.hprof
+java_pid2878.hprof
+picasso/build/

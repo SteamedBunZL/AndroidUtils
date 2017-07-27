@@ -31,12 +31,17 @@ apply plugin: 'com.android.databinding'//databinding 增加这一句
 dependencies {
     compile dep.okhttp
     compile dep.support
-    compile dep.butterknife//Butterknife 增加这一句
-    apt dep.butterknifeApt//Butterknife 增加这句
+    compile dep.butterknife
+    //Butterknife 增加这一句
+    apt dep.butterknifeApt
+    //Butterknife 增加这句
     compile dep.circleimageview
     compile dep.cardview
     compile dep.design
+    compile dep.rxjava
+    compile dep.rxandroid
     provided files('libs/layoutlib.jar')
+
 }
 
 task hello {
@@ -52,6 +57,13 @@ task hello {
         println 'Helloc'
     }
 }
+
+//task printDependencies << {
+//    configurations.getByName('com.android.support:cardview-v7:24.2.0').each {
+//        dependencies -> println dependency
+//    }
+//
+//}
 
 def variable = 1
 def varable = 2
