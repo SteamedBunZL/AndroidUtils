@@ -1,7 +1,5 @@
 package com.tcl.zhanglong.utils.java.Lambda;
 
-import com.tcl.zhanglong.utils.Utils.DebugLog;
-
 /**
  * Created by Steve on 16/9/12.
  */

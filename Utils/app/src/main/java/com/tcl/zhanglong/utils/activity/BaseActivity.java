@@ -4,10 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.tcl.zhanglong.utils.Utils.DebugLog;
-
-import static android.text.Hyphenator.init;
-import static android.view.WindowManagerGlobal.initialize;
+import com.steve.commonlib.DebugLog;
 
 /**
  * Created by Steve on 16/12/15.

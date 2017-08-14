@@ -1,14 +1,13 @@
 package com.tcl.zhanglong.utils.activity.launchmode;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.steve.commonlib.DebugLog;
 import com.tcl.zhanglong.utils.R;
-import com.tcl.zhanglong.utils.Utils.DebugLog;
 
 /**
  * Created by Steve on 16/12/14.

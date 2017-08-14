@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.tcl.aveng">
+
+    <application android:label="@string/app_name">
+		
+		<service android:name="com.tcl.security.daemon.DaemonServiceLP"
+            android:process=":ScanService">
+        </service>
+
+        <service android:name="com.tcl.security.daemon.DaemonServiceLN"
+            android:process=":ScanService"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+
+    </application>
+</manifest>

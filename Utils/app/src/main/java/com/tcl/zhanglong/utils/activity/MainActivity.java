@@ -2,7 +2,6 @@ package com.tcl.zhanglong.utils.activity;
 
 import android.app.ActivityManagerNative;
 import android.app.IActivityManager;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Environment;
 import android.os.RemoteException;
@@ -10,12 +9,11 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.steve.commonlib.DebugLog;
+import com.steve.utils.ReflectUtils;
+import com.tcl.security.cloudengine.CloudEngine;
 import com.tcl.zhanglong.utils.R;
-import com.tcl.zhanglong.utils.Utils.DebugLog;
-import com.tcl.zhanglong.utils.Utils.ThreadPoolUtil;
-import com.tcl.zhanglong.utils.binderpool.ScanActivity;
 import com.tcl.zhanglong.utils.notification.AnotherColorEngine;
 import com.tcl.zhanglong.utils.notification.NotificationColorEngine;
 import com.tcl.zhanglong.utils.notification.NotificationManager;
@@ -32,8 +30,6 @@ import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.tcl.zhanglong.utils.notification.AnotherColorEngine.getNotificationColor;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
@@ -61,7 +57,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void initData() {
-
+        CloudEngine.init(this,"sfefwfwf",null);
     }
 
 
@@ -77,8 +73,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         button4.setOnClickListener(this);
     }
 
-
-    private List testException(){
+    /**
+     * 验证try catch finally return 的流程
+     * @return
+     */
+    private List verifyException(){
         List<String> list = new ArrayList<>();
 
         try {
@@ -95,6 +94,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
         DebugLog.e("走了下面");
         return list;
+    }
+
+    /**
+     * 验证反射工具类功能
+     */
+    private void verifyReflectUtils(){
+        //反射内部类
+        DebugLog.w("-----------%s------------","VerifyRelectUtils");
+        DebugLog.d("%s",ReflectUtils.dumpClass("com.steve.utils.Outer$Inner"));
+        Object obj = ReflectUtils.newInstance("com.steve.utils.Outer$Inner",ReflectUtils.newInstance("com.steve.utils.Outer"));
+        DebugLog.d("%s",ReflectUtils.getField(obj,"innerField"));
+        DebugLog.d("%s",ReflectUtils.invokeMethod(obj,"innerMethod"));
+
+
+        //反射内部静态类
+        Class<?> clazz = ReflectUtils.getClazz("com.steve.utils.Outer$StaticInner");
+        DebugLog.d("%s",ReflectUtils.getStaticField(clazz,"innerStaticField"));
+        Object obj2 = ReflectUtils.newInstance("com.steve.utils.Outer$StaticInner");
+        DebugLog.d("%s",ReflectUtils.getField(obj2,"innerField"));
+        DebugLog.d("%s",ReflectUtils.invokeMethod(obj2,"innerMethod"));
+        DebugLog.d("%s",ReflectUtils.invokeStaticMethod(clazz,"innerStaticMethod"));
     }
 
     private void testObject(){
@@ -127,29 +147,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button2:
-//                Toast.makeText(this,"Start Function",Toast.LENGTH_SHORT).show();
-//                Intent intent  = new Intent(this,FunctionListActivity.class);
-//                startActivity(intent);
-//                for(int i = 0;i<10;i++){
-//                    ThreadPoolUtil.getIns().getThreadPoolExecutor().execute(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            try {
-//                                DebugLog.e("One Thread is running");
-//                                Thread.sleep(5000);
-//                            } catch (InterruptedException e) {
-//                                e.printStackTrace();
-//                            }
-//                        }
-//                    });
-//                }
-
-
-                //ScanActivity.startScanActivity(this);
-
-//                manager.testRemoteViewNotification(this);
-
-                getTime2(textview);
+                //getTime2(textview);
+                verifyReflectUtils();
                 break;
             case R.id.button3:
                 //getAndroidId();
@@ -158,7 +157,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.button4:
                 //changeLan();
-                testException();
+                verifyException();
                 break;
         }
     }

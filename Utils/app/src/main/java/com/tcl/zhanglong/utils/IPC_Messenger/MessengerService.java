@@ -10,7 +10,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
-import com.tcl.zhanglong.utils.Utils.DebugLog;
+import com.steve.commonlib.DebugLog;
 
 /**
  * 最大的缺点是不能并发,消息要一个个处理

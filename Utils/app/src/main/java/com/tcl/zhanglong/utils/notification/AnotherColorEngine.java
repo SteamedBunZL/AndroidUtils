@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.tcl.zhanglong.utils.Utils.DebugLog;
+import com.steve.commonlib.DebugLog;
 
 import java.util.ArrayList;
 import java.util.List;

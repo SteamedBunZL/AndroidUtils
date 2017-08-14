@@ -9,7 +9,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AVEng" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/commonlib" />
+            <option value="$PROJECT_DIR$/hermes" />
+            <option value="$PROJECT_DIR$/hermes-eventbus" />
             <option value="$PROJECT_DIR$/logger" />
             <option value="$PROJECT_DIR$/lottie" />
             <option value="$PROJECT_DIR$/picasso" />

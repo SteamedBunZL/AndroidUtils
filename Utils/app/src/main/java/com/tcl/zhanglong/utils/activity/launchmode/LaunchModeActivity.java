@@ -12,8 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.steve.commonlib.DebugLog;
 import com.tcl.zhanglong.utils.R;
-import com.tcl.zhanglong.utils.Utils.DebugLog;
 
 /**
  * Created by Steve on 16/12/13.

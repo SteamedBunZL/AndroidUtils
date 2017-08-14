@@ -7,7 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 
-import com.tcl.zhanglong.utils.Utils.DebugLog;
+import com.steve.commonlib.DebugLog;
 
 import java.lang.reflect.Method;
 import java.util.List;
