@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="junk_tag_system_fixed_cache_item_data_log_title">Activity log</string>
+    <string name="junk_tag_system_fixed_cache_item_data_tombstone_title">Error log</string>
+    <string name="junk_tag_system_fixed_cache_item_data_tombstones_title">Error log</string>
+    <string name="junk_tag_system_fixed_cache_item_data_anr_title">No response log</string>
+    <string name="junk_tag_system_fixed_cache_item_sd_pushLog_title">Push log</string>
+    <string name="junk_tag_system_fixed_cache_item_sd_lostfound_title">Fragmented SD card files</string>
+    <string name="junk_tag_RF_ImageThumbnails">Gallery Thumbnails</string>
+    <string name="junk_tag_junk_apk_new_download">New</string>
+    <string name="junk_tag_fm_list_apk_type_not_installed">Not Installed</string>
+    <string name="junk_tag_fm_list_apk_type_installed">Installed</string>
+    <string name="fm_list_apk_item_summary_new">New</string>
+    <string name="fm_list_apk_item_summary_old">Old</string>
+</resources>

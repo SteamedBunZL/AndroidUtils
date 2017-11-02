@@ -1,6 +1,6 @@
 package com.tcl.zhanglong.utils;
 
-import android.app.Application;
+import android.support.multidex.MultiDexApplication;
 
 import com.steve.commonlib.DebugLog;
 import com.tcl.zhanglong.utils.Utils.AppUtil;
@@ -8,7 +8,7 @@ import com.tcl.zhanglong.utils.Utils.AppUtil;
 /**
  * Created by Steve on 16/9/7.
  */
-public class UtilApplication extends Application{
+public class UtilApplication extends MultiDexApplication{
 
     public static UtilApplication mApplication;
 

@@ -1,8 +1,11 @@
 package com.tcl.zhanglong.utils.activity;
 
-import android.app.ActivityManagerNative;
-import android.app.IActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Environment;
 import android.os.RemoteException;
 import android.provider.Settings;
@@ -24,12 +27,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.Intent.ACTION_VIEW;
+import static com.steve.utils.ReflectUtils.dumpClass;
+import static com.steve.utils.ReflectUtils.invokeMethod;
 
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
@@ -47,6 +55,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     TextView textview;
 
     NotificationManager manager = new NotificationManager(this,new NotificationColorEngine());
+
+    //CleanManagerImpl cleanMgr = new CleanManagerImpl(new ArrayList<JunkGroupTitle>());
 
 
 
@@ -102,10 +112,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private void verifyReflectUtils(){
         //反射内部类
         DebugLog.w("-----------%s------------","VerifyRelectUtils");
-        DebugLog.d("%s",ReflectUtils.dumpClass("com.steve.utils.Outer$Inner"));
+        DebugLog.d("%s", dumpClass("com.steve.utils.Outer$Inner"));
         Object obj = ReflectUtils.newInstance("com.steve.utils.Outer$Inner",ReflectUtils.newInstance("com.steve.utils.Outer"));
         DebugLog.d("%s",ReflectUtils.getField(obj,"innerField"));
-        DebugLog.d("%s",ReflectUtils.invokeMethod(obj,"innerMethod"));
+        DebugLog.d("%s", invokeMethod(obj,"innerMethod"));
 
 
         //反射内部静态类
@@ -113,7 +123,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         DebugLog.d("%s",ReflectUtils.getStaticField(clazz,"innerStaticField"));
         Object obj2 = ReflectUtils.newInstance("com.steve.utils.Outer$StaticInner");
         DebugLog.d("%s",ReflectUtils.getField(obj2,"innerField"));
-        DebugLog.d("%s",ReflectUtils.invokeMethod(obj2,"innerMethod"));
+        DebugLog.d("%s", invokeMethod(obj2,"innerMethod"));
         DebugLog.d("%s",ReflectUtils.invokeStaticMethod(clazz,"innerStaticMethod"));
     }
 
@@ -148,17 +158,44 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         switch (v.getId()){
             case R.id.button2:
                 //getTime2(textview);
-                verifyReflectUtils();
+                //verifyReflectUtils();
+                //testNotificationBar(this);
+                //intenttest.setClassName("com.ehawk.antivirus.applock.wifi","com.tcl.security.SplashActivity");
+                //performGoNext("com.baidu.input");
+                NotificationManager manager = new NotificationManager(this,new NotificationColorEngine());
+                manager.testNotification(this);
                 break;
             case R.id.button3:
                 //getAndroidId();
                 //Log.e("","===ZL lan : " + getLang() + ", country : " + getArea() + ", STR : " + Locale.getDefault().toString());
                 //testListFiles();
+                //Intent intent = new Intent(this,SecurityViewTestActivity.class);
+                //startActivity(intent);
+
+                testHashSet();
                 break;
             case R.id.button4:
                 //changeLan();
                 verifyException();
                 break;
+        }
+    }
+
+    private void testHashSet(){
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        //list.add(2);
+        //list.add(3);
+        list.add(4);
+        list.add(5);
+        DebugLog.w("List : %s",list);
+        HashSet<Integer> set = new HashSet<>();
+        for(Integer i:list){
+            set.add(i);
+        }
+        DebugLog.w("Set : %s",set);
+        for(Integer i:set){
+            DebugLog.e("Every Set : %d",i);
         }
     }
 
@@ -168,18 +205,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         return ANDROID_ID;
     }
 
-    private void changeLan(){
-        IActivityManager iActMag = ActivityManagerNative.getDefault();
-        try {
-            Configuration config = iActMag.getConfiguration();
-            config.locale = Locale.CHINESE;
-            // 此处需要声明权限:android.permission.CHANGE_CONFIGURATION
-            // 会重新调用 onCreate();
-            iActMag.updateConfiguration(config);
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void changeLan(){
+//        IActivityManager iActMag = ActivityManagerNative.getDefault();
+//        try {
+//            Configuration config = iActMag.getConfiguration();
+//            config.locale = Locale.CHINESE;
+//            // 此处需要声明权限:android.permission.CHANGE_CONFIGURATION
+//            // 会重新调用 onCreate();
+//            iActMag.updateConfiguration(config);
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
 
@@ -264,6 +301,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         String time = cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
         System.out.println("TimeTest.method3() date="+date+",time="+time);
         return date + " " + time;
+    }
+
+
+    private void testNotificationBar(Context context){
+        PackageManager pm = getPackageManager();
+        //ReflectUtils.invokeMethod(service,"expandNotificationsPanel");
+        //DebugLog.w("ss : %s",msg);
+    }
+
+    public static int index = 1;
+
+    void performGoNext(String packageName) {
+        index = 1;
+        Intent intent_install = new Intent("/");
+        ComponentName cm = new ComponentName("com.android.settings", "com.android.settings.applications.InstalledAppDetailsTop");
+        intent_install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent_install.setComponent(cm);
+        intent_install.setData(Uri.parse(packageName));
+        intent_install.setAction(ACTION_VIEW);
+        startActivity(intent_install);
     }
 
 

@@ -26,5 +26,7 @@ public class ActivityA extends AppCompatActivity{
                 startActivity(new Intent(ActivityA.this,ActivityB.class));
             }
         });
+
+        finish();
     }
 }

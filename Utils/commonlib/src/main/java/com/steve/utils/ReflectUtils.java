@@ -39,6 +39,19 @@ import java.util.Arrays;
 public class ReflectUtils {
 
 
+    public static final int BOOLEAN_TYPE = 1;
+    public static final int BYTE_TYPE = 2;
+    public static final int SHORT_TYPE = 3;
+    public static final int INT_TYPE = 4;
+    public static final int LONG_TYPE = 5;
+    public static final int FLOAT_TYPE = 6;
+    public static final int DOUBLE_TYPE = 7;
+    public static final int CHARACTER_TYPE = 8;
+    public static final int STRING_TYPE = 9;
+    public static final int CHASEQUENCE_TYPE = 10;
+    public static final int OBJECT_TYPE = 11;
+
+
     /**
      * 实例化获取类名对应的类
      *
@@ -303,6 +316,7 @@ public class ReflectUtils {
 
     /**
      * 将对象转化为class
+     * 自动装箱 int -> Integer 会导致getMethod失败
      * @param objs
      * @return
      */
@@ -311,9 +325,15 @@ public class ReflectUtils {
         int objLen = objs == null? 0 : objs.length;
 
         Class<?>[] clazzTypes = new Class[objLen];
+        Class<?> clazz;
+        int type;
         for(int i = 0;i<objLen;i++){
-            clazzTypes[i] = objs[i].getClass();
-
+            clazz = objs[i].getClass();
+            type = getParameterType(clazz);
+            if (type != OBJECT_TYPE)
+                clazzTypes[i] = getParameterType(type);
+            else
+                clazzTypes[i] = clazz;
         }
         return clazzTypes;
     }
@@ -353,5 +373,62 @@ public class ReflectUtils {
             sb.append(m.toString()).append("\n");
         }
         return sb.toString();
+    }
+
+    /**
+     * Chasequence.class的处理还是有点问题
+     * @param clazz
+     * @return
+     */
+    private static int getParameterType(Class<?> clazz) {
+        if (clazz == Boolean.class){
+            return BOOLEAN_TYPE;
+        }else if (clazz == Byte.class){
+            return BYTE_TYPE;
+        }else if (clazz == Short.class){
+            return SHORT_TYPE;
+        }else if(clazz == Integer.class){
+            return INT_TYPE;
+        }else if (clazz == Long.class){
+            return LONG_TYPE;
+        }else if(clazz == Float.class){
+            return FLOAT_TYPE;
+        }else if(clazz == Double.class){
+            return DOUBLE_TYPE;
+        }else if(clazz == Character.class){
+            return CHARACTER_TYPE;
+        }else if(clazz == String.class){
+            return STRING_TYPE;
+        }else if(clazz == CharSequence.class){
+            return CHASEQUENCE_TYPE;
+        }else{
+            return OBJECT_TYPE;
+        }
+    }
+
+    private static Class<?> getParameterType(int type) {
+        switch (type){
+            case BOOLEAN_TYPE:
+                return boolean.class;
+            case BYTE_TYPE:
+                return byte.class;
+            case SHORT_TYPE:
+                return short.class;
+            case INT_TYPE:
+                return int.class;
+            case LONG_TYPE:
+                return long.class;
+            case FLOAT_TYPE:
+                return float.class;
+            case DOUBLE_TYPE:
+                return double.class;
+            case CHARACTER_TYPE:
+                return char.class;
+            case STRING_TYPE:
+                return String.class;
+            case CHASEQUENCE_TYPE:
+                return CharSequence.class;
+        }
+        return null;
     }
 }

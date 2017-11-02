@@ -175,16 +175,16 @@ public class Picasso {
     this.listener = listener;
     this.requestTransformer = requestTransformer;
     this.defaultBitmapConfig = defaultBitmapConfig;
-
+    //内置的7个RequestHandler
     int builtInHandlers = 7; // Adjust this as internal handlers are added or removed.
     int extraCount = (extraRequestHandlers != null ? extraRequestHandlers.size() : 0);
     List<RequestHandler> allRequestHandlers =
-        new ArrayList<RequestHandler>(builtInHandlers + extraCount);
+        new ArrayList<RequestHandler>(builtInHandlers + extraCount);//构造List 好节约
 
     // ResourceRequestHandler needs to be the first in the list to avoid
     // forcing other RequestHandlers to perform null checks on request.uri
     // to cover the (request.resourceId != 0) case.
-    allRequestHandlers.add(new ResourceRequestHandler(context));
+    allRequestHandlers.add(new ResourceRequestHandler(context));//ResourceRequestHandler必须在第一个
     if (extraRequestHandlers != null) {
       allRequestHandlers.addAll(extraRequestHandlers);
     }
@@ -194,7 +194,7 @@ public class Picasso {
     allRequestHandlers.add(new AssetRequestHandler(context));
     allRequestHandlers.add(new FileRequestHandler(context));
     allRequestHandlers.add(new NetworkRequestHandler(dispatcher.downloader, stats));
-    requestHandlers = Collections.unmodifiableList(allRequestHandlers);
+    requestHandlers = Collections.unmodifiableList(allRequestHandlers);//list 只可读 不可写
 
     this.stats = stats;
     this.targetToAction = new WeakHashMap<Object, Action>();
@@ -637,7 +637,7 @@ public class Picasso {
     CleanupThread(ReferenceQueue<Object> referenceQueue, Handler handler) {
       this.referenceQueue = referenceQueue;
       this.handler = handler;
-      setDaemon(true);
+      setDaemon(true);//守护线程
       setName(THREAD_PREFIX + "refQueue");
     }
 

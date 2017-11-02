@@ -1,7 +1,9 @@
 package com.tcl.zhanglong.utils.notification;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
@@ -28,6 +30,14 @@ public class NotificationManager {
      * @param context
      */
     public void testNotification(Context context){
+        Intent intentClick = new Intent(context,NotificationBroadcastReceiver.class);
+        intentClick.setAction("notification_clicked");
+        PendingIntent pendingIntentClick = PendingIntent.getBroadcast(context,0,intentClick,PendingIntent.FLAG_ONE_SHOT);
+
+        Intent intentCancel = new Intent(context,NotificationBroadcastReceiver.class);
+        intentCancel.setAction("notification_cancelled");
+        PendingIntent pendingIntentCancel = PendingIntent.getBroadcast(context,0,intentCancel,PendingIntent.FLAG_ONE_SHOT);
+
         android.app.NotificationManager manager = (android.app.NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         Notification notification = builder
@@ -35,6 +45,8 @@ public class NotificationManager {
                 .setContentText("这是通知内容")
                 .setWhen(System.currentTimeMillis())
                 .setSmallIcon(R.mipmap.ic_launcher)  //5.0  如果不设置小图标 会崩溃????
+                .setContentIntent(pendingIntentClick)
+                .setDeleteIntent(pendingIntentCancel)
                 //.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))  //但是可以不设置大图标,哦哦,原来如此
                 .build();
         manager.notify(1, notification);

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <string name="ga_trackingId">UA-77670415-1</string>
+    <string name="ga_sampleFrequency">100.0</string>
+    <integer name="ga_sessionTimeout">1800</integer>
+    <bool name="ga_autoActivityTracking">true</bool>
+    <bool name="ga_anonymizeIp">false</bool>
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+
+    <screenName name="com.clean.spaceplus.main.MainActivity">主页</screenName>
+    <screenName name="com.clean.spaceplus.boost.BoostActivity">内存加速</screenName>
+    <screenName name="com.clean.spaceplus.junk.JunkActivity">垃圾扫描</screenName>
+    <screenName name="com.clean.spaceplus.appmgr.AppMgrActivity">应用管理</screenName>
+    <screenName name="com.clean.spaceplus.setting.history.HistoryActivity">清理历史</screenName>
+    <screenName name="com.clean.spaceplus.setting.feedback.FeedbackActivity">用户反馈</screenName>
+    <screenName name="com.clean.spaceplus.main.SplashActivity">欢迎页面</screenName>
+
+
+</resources>

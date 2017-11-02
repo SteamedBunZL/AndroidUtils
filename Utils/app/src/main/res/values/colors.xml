@@ -6,4 +6,8 @@
     <color name="blue_button">#2DABE0</color>
     <color name="blue_button_hover">#409CC7</color>
     <color name="gray_e8">#E8E8EB</color>
+
+    <color name="_0722ba">#0c20b3</color>
+    <color name="_0085d2">#322DABE0</color>
+    <color name="_0066e3">#642DABE0</color>
 </resources>

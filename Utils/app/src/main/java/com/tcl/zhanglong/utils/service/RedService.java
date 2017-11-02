@@ -2,15 +2,29 @@ package com.tcl.zhanglong.utils.service;
 
 import android.accessibilityservice.AccessibilityService;
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.DisplayMetrics;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.widget.Button;
 
 import com.steve.commonlib.DebugLog;
+import com.tcl.zhanglong.utils.activity.MainActivity;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Locale;
+
+import static android.R.id.list;
+import static android.content.Intent.ACTION_VIEW;
+import static com.tcl.zhanglong.utils.activity.MainActivity.index;
 
 /**
  * Created by Steve on 17/1/23.
@@ -24,6 +38,7 @@ public class RedService extends AccessibilityService{
 
 
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         int eventType = event.getEventType();
@@ -32,23 +47,33 @@ public class RedService extends AccessibilityService{
         switch (eventType){
             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED:
                 DebugLog.d("Window State Change Top : %s",className);
-                if (className.equals(CLASSNAME_UI_WECHAT_CHAT)){
-                    //开始抢红包
-                    getPacket();
-                }else if (className.equals(CLASSNAME_UI_WECHAT_RED)){
-                    //打开红包
-                    openPacket();
-                }else if (className.equals("com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyDetailUI")){
-                    close();
+
+//                if (className.equals(CLASSNAME_UI_WECHAT_CHAT)){
+//                    //开始抢红包
+//                    getPacket();
+//                }else if (className.equals(CLASSNAME_UI_WECHAT_RED)){
+//                    //打开红包
+//                    openPacket();
+//                }else if (className.equals("com.tencent.mm.plugin.luckymoney.ui.LuckyMoneyDetailUI")){
+//                    close();
+//                }
+                AccessibilityNodeInfo info = event.getSource();
+                if (className.equals("com.android.settings.applications.InstalledAppDetailsTop")){
+                    if (MainActivity.index == 1)
+                        performForceStopById(info);
+                    else
+                        performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK);
+                } else if (className.equals("android.app.AlertDialog")) {
+                    performConfigById(info);
                 }
                 break;
-            case AccessibilityEvent.TYPE_VIEW_SCROLLED:
-                DebugLog.d("Type Scroll Top : %s",className);
-                //if (className.equals(CLASSNAME_UI_WECHAT_CHAT)){
-                    //开始抢红包
-                    getPacket();
-                //}
-                break;
+//            case AccessibilityEvent.TYPE_VIEW_SCROLLED:
+//                DebugLog.d("Type Scroll Top : %s",className);
+//                //if (className.equals(CLASSNAME_UI_WECHAT_CHAT)){
+//                    //开始抢红包
+//                    getPacket();
+//                //}
+//                break;
         }
     }
 
@@ -192,4 +217,47 @@ public class RedService extends AccessibilityService{
         AccessibilityNodeInfo nodeInfo = getRootInActiveWindow();
         openRecycle(nodeInfo);
     }
+
+    String stopText;
+
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    boolean performForceStopById(AccessibilityNodeInfo info){
+        if (index != 1)
+            return false;
+
+        List<AccessibilityNodeInfo> list = info.findAccessibilityNodeInfosByViewId("com.android.settings:id/right_button");
+        for(AccessibilityNodeInfo subInfo:list){
+            if (subInfo.getClassName().equals(Button.class.getName())&&subInfo.isEnabled()){
+                stopText = (String) subInfo.getText();
+                //perform click
+                subInfo.performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                index--;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Locale getSystemLocale(){
+        return Locale.getDefault();
+    }
+
+    //android:id/button1
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    boolean performConfigById(AccessibilityNodeInfo info){
+        List<AccessibilityNodeInfo> list = info.findAccessibilityNodeInfosByViewId("android:id/button1");
+        for(AccessibilityNodeInfo subInfo:list){
+            if (subInfo.getClassName().equals(Button.class.getName())&&subInfo.isEnabled()){
+                String text = (String) subInfo.getText();
+                DebugLog.t("MyAccessibility").w("Locale=%s,Stop Text=%s,Config Text=%s",getSystemLocale(),stopText,text);
+                //perform click
+                performGlobalAction(AccessibilityService.GLOBAL_ACTION_BACK);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
 }

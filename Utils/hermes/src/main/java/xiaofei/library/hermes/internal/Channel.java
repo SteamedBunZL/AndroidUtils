@@ -70,6 +70,7 @@ public class Channel {
 
     private static final TypeCenter TYPE_CENTER = TypeCenter.getInstance();
 
+    //创建一个Stub对象，并在内部实现IHermesServiceCallback接口方法，然后在Service的onBind中返回这个Stub对象
     private IHermesServiceCallback mHermesServiceCallback = new IHermesServiceCallback.Stub() {
 
         private Object[] getParameters(ParameterWrapper[] parameterWrappers) throws HermesException {
@@ -183,6 +184,12 @@ public class Channel {
         return sInstance;
     }
 
+    /**
+     * bind HermesService
+     * @param context
+     * @param packageName
+     * @param service
+     */
     public void bind(Context context, String packageName, Class<? extends HermesService> service) {
         HermesServiceConnection connection;
         synchronized (this) {
@@ -207,6 +214,11 @@ public class Channel {
         context.bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 
+    /**
+     * unbind HermesService
+     * @param context
+     * @param service
+     */
     public void unbind(Context context, Class<? extends HermesService> service) {
         synchronized (this) {
             Boolean bound = mBounds.get(service);

@@ -76,7 +76,7 @@ public class MainService implements IMainService {
     @MethodId("post")
     @Override
     public void post(Object event) {
-        mEventBus.post(event);//先主进程自己的eventbus进行消息分发
+        mEventBus.post(event);//先主进程自己用eventbus进行消息分发
         Collection<ISubService> subServices = mSubServices.values();//获取values的集合
         for (ISubService subService : subServices) {
             subService.post(event);//子进程执行消息分发
