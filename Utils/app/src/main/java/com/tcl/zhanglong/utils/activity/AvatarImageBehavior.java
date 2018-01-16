@@ -12,7 +12,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * 图片控件位置动画
- *
  * @author wangchenlong
  */
 @SuppressWarnings("unused")
