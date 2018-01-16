@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPageBg"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPageBg"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="173dp"
+                android:gravity="bottom"
+                android:orientation="vertical"
+                android:background="@drawable/ic_nav_bg_drawerlayout"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:background="#4000"
+                    android:orientation="vertical"
+                    android:paddingBottom="16dp"
+                    android:paddingLeft="64dp"
+                    android:paddingRight="64dp"
+                    android:paddingTop="16dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:scaleType="centerCrop"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="16dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_username"
+                            android:text="夕阳无限好"
+                            android:textColor="@color/colorWhite"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tv_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_bg_level"
+                            android:layout_marginLeft="6dp"
+                            android:text="Lv.10"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="10sp"
+                            android:textStyle="italic|bold"
+                            />
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</layout>

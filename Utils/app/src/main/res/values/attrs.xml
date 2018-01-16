@@ -12,4 +12,17 @@
         <attr name="rightBackgroud" format="reference|color"/>
         <attr name="rightText" format="string"/>
     </declare-styleable>
+
+    <attr name="indexBarTextSize" format="dimension"/>
+
+    <declare-styleable name="IndexBar">
+        <attr name="indexBarTextSize"/>
+        <attr name="indexBarPressBackground" format= "color"/>
+    </declare-styleable>
+
+    <declare-styleable name="SwipeMenuLayout">
+        <attr name="swipeEnable" format="boolean"/>
+        <attr name="ios" format="boolean"/>
+        <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
 </resources>

@@ -1,1 +1,1 @@
-include ':app', ':picasso', ':volley', ':lottie', ':shimmer-android', ':logger', ':AVEng', ':commonlib', ':hermes', ':hermes-eventbus', ':DroidPluginLibrary'
+include ':app', ':picasso', ':volley', ':lottie', ':shimmer-android', ':logger', ':AVEng', ':commonlib', ':hermes', ':hermes-eventbus', ':DroidPluginLibrary', ':javacallc', ':ccalljava', ':cleansdk', ':copycloudreader', ':appalivedemo'

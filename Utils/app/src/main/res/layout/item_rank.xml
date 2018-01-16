@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.tcl.zhanglong.utils.View.wechat_emoji_rank.SwipeMenuLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="15dp"
+    app:ios = "true"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:paddingRight="20dp"
+        >
+
+        <TextView
+            android:id="@+id/tv_emoji_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:text="表情"
+            />
+
+        <TextView
+            android:id="@+id/tv_emoji_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectangle_radius_blue"
+            android:textColor="#fff"
+            android:padding="10dp"
+            android:text="move"
+            android:textSize="20sp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_dark"
+        android:clickable="true"
+        android:text="删除"
+        android:textColor="#fff"
+        />
+
+
+</com.tcl.zhanglong.utils.View.wechat_emoji_rank.SwipeMenuLayout>

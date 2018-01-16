@@ -3,18 +3,22 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="distributionType" value="LOCAL" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AVEng" />
             <option value="$PROJECT_DIR$/DroidPluginLibrary" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/appalivedemo" />
+            <option value="$PROJECT_DIR$/ccalljava" />
+            <option value="$PROJECT_DIR$/cleansdk" />
             <option value="$PROJECT_DIR$/commonlib" />
+            <option value="$PROJECT_DIR$/copycloudreader" />
             <option value="$PROJECT_DIR$/hermes" />
             <option value="$PROJECT_DIR$/hermes-eventbus" />
+            <option value="$PROJECT_DIR$/javacallc" />
             <option value="$PROJECT_DIR$/logger" />
             <option value="$PROJECT_DIR$/lottie" />
             <option value="$PROJECT_DIR$/picasso" />

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_big"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/kugou_icon_big" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentLeft="true" >
+            <TextView
+                android:ellipsize="end"
+                android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+                android:id="@+id/ec5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="酷狗音乐"
+                android:scrollHorizontally="true"
+                android:singleLine="true"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:ellipsize="end"
+                android:gravity="top|bottom|center_vertical|fill_vertical|center|fill"
+                android:id="@+id/ec6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="歌手"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:textColor="#000000"
+                />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#000000"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:gravity="center_vertical"
+            >
+
+            <ImageView
+                android:id="@+id/tv_prev"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/selector_prev"
+                android:layout_weight="1"
+                />
+
+            <ImageView
+                android:id="@+id/tv_play_pause"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/selector_pause"
+                android:layout_weight="1"
+                />
+
+
+            <ImageView
+                android:id="@+id/tv_next"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/selector_next"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

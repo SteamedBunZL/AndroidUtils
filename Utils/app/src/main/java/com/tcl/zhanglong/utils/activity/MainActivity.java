@@ -1,25 +1,44 @@
 package com.tcl.zhanglong.utils.activity;
 
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.Environment;
 import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.provider.Settings;
+import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
+import android.support.v7.app.NotificationCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.steve.commonlib.DebugLog;
 import com.steve.utils.ReflectUtils;
 import com.tcl.security.cloudengine.CloudEngine;
 import com.tcl.zhanglong.utils.R;
+import com.tcl.zhanglong.utils.Utils.VibratorUtils;
+import com.tcl.zhanglong.utils.View.wechat_address_book.WeChatActivity;
+import com.tcl.zhanglong.utils.View.wechat_emoji_rank.WeChatEmojiActivity;
+import com.tcl.zhanglong.utils.jni.JNI;
 import com.tcl.zhanglong.utils.notification.AnotherColorEngine;
+import com.tcl.zhanglong.utils.notification.BigRemoteViews;
 import com.tcl.zhanglong.utils.notification.NotificationColorEngine;
 import com.tcl.zhanglong.utils.notification.NotificationManager;
+import com.tcl.zhanglong.utils.notification.SmallRemoteViews;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -30,7 +49,10 @@ import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 import java.util.TimeZone;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +81,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     //CleanManagerImpl cleanMgr = new CleanManagerImpl(new ArrayList<JunkGroupTitle>());
 
 
+    private MediaSessionCompat mSession;
+
+
 
     @Override
     protected int getContentViewId() {
@@ -67,6 +92,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     protected void initData() {
+        setUpMediaSession();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            mSession.setActive(true);
         CloudEngine.init(this,"sfefwfwf",null);
     }
 
@@ -162,8 +190,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 //testNotificationBar(this);
                 //intenttest.setClassName("com.ehawk.antivirus.applock.wifi","com.tcl.security.SplashActivity");
                 //performGoNext("com.baidu.input");
-                NotificationManager manager = new NotificationManager(this,new NotificationColorEngine());
-                manager.testNotification(this);
+
+
+                //测试通知栏点击和删除时收到的通知
+                //NotificationManager manager = new NotificationManager(this,new NotificationColorEngine());
+                //manager.testNotification(this);
+
+                //测试修改HashSet Arraylist中修改对象后 remove有没有生效
+                //testSet();
+                //testList();
+
+                //jni
+                //String ss = new JNI().sayHello();
+
+                //testPlusPlus();
+                //testArray();
+
+                //startActivity(new Intent(MainActivity.this, WeChatActivity.class));
+                //VibratorUtils.getInstacce().startVibrate(45,MainActivity.this);
+
+                //android.app.NotificationManager nm = (android.app.NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                //nm.notify(1001,buildNotification());
+                //sendBigRemoteViews();
+
+                invokeTimer();
                 break;
             case R.id.button3:
                 //getAndroidId();
@@ -172,13 +222,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 //Intent intent = new Intent(this,SecurityViewTestActivity.class);
                 //startActivity(intent);
 
-                testHashSet();
+                //testHashSet();
+                startActivity(new Intent(MainActivity.this, WeChatEmojiActivity.class));
                 break;
             case R.id.button4:
                 //changeLan();
                 verifyException();
                 break;
         }
+    }
+
+
+    private void testPlusPlus(){
+        for(int i = 0;i<10;++i){
+            DebugLog.d("i = %d",i);
+        }
+    }
+
+    private void testArray(){
+        ArrayList<Person> list = new ArrayList<>();
+        list.add(null);
+        DebugLog.d("list size %d",list.size());
     }
 
     private void testHashSet(){
@@ -321,6 +385,197 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         intent_install.setData(Uri.parse(packageName));
         intent_install.setAction(ACTION_VIEW);
         startActivity(intent_install);
+    }
+
+
+
+    void testSet(){
+        Person p1 = new Person("张一","男",23);
+        Person p2 = new Person("张二","女",35);
+        Person p3 = new Person("张三","男",40);
+
+        Set<Person> list = new HashSet<>();
+        list.add(p1);
+        list.add(p2);
+        list.add(p3);
+
+        DebugLog.w("set before hashcode %d",p3.hashCode());
+        p3.setAge(2);
+        p3.setName("李二");
+        DebugLog.w("set after hashcode %d",p3.hashCode());
+
+        list.remove(p3);
+
+        DebugLog.w("set remove list %s",list);
+
+        list.add(p3);
+
+        DebugLog.w("set add list %s",list);
+
+
+
+    }
+
+    void testList(){
+        Person p1 = new Person("张一","男",23);
+        Person p2 = new Person("张二","女",35);
+        Person p3 = new Person("张三","男",40);
+
+        List<Person> list = new ArrayList<>();
+        list.add(p1);
+        list.add(p2);
+        list.add(p3);
+
+        p3.setAge(3);
+        list.remove(p3);
+
+        DebugLog.w("list remove list %s",list);
+
+        list.add(p3);
+
+        DebugLog.w("list add list %s",list);
+
+
+
+    }
+
+
+    private Notification buildNotification() {
+        final String albumName = "周杰伦";
+        final String artistName = "周杰伦";
+        final boolean isPlaying = false;
+        String text = TextUtils.isEmpty(albumName)
+                ? artistName : artistName + " - " + albumName;
+
+        int playButtonResId = isPlaying
+                ? R.drawable.ic_pause_white_36dp : R.drawable.ic_play_white_36dp;
+
+        //Intent nowPlayingIntent = NavigationUtils.getNowPlayingIntent(this);
+        //PendingIntent clickIntent = PendingIntent.getActivity(this, 0, nowPlayingIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Bitmap artwork = null;
+        //artwork = ImageLoader.getInstance().loadImageSync(TimberUtils.getAlbumArtUri(getAlbumId()).toString());
+
+//        if (artwork == null) {
+//            artwork = ImageLoader.getInstance().loadImageSync("drawable://" + R.drawable.ic_empty_music2);
+//        }
+
+        artwork = BitmapFactory.decodeResource(getResources(),R.drawable.ic_empty_music2);
+
+
+        android.support.v4.app.NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notification)
+                .setLargeIcon(artwork)
+                .setContentIntent(null)
+
+                .setContentTitle("Test")
+                .setContentText(text)
+                .setWhen(System.currentTimeMillis())
+                .setOngoing(true)
+                .addAction(R.drawable.ic_skip_previous_white_36dp,
+                        "",
+                        null)
+                .addAction(playButtonResId, "",
+                        null)
+                .addAction(R.drawable.ic_skip_next_white_36dp,
+                        "",
+                        null);
+
+
+
+        if (isJellyBeanMR1()) {
+            builder.setShowWhen(false);
+        }
+        if (isLollipop()) {
+            builder.setVisibility(android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC);
+            NotificationCompat.MediaStyle style = new NotificationCompat.MediaStyle()
+                    .setMediaSession(mSession.getSessionToken());
+                    //.setMediaSession(new MediaSessionCompat(MainActivity.this,"MediaSession",new ComponentName(MainActivity.this,Intent.ACTION_MEDIA_BUTTON),null).getSessionToken())
+                    //.setShowActionsInCompactView(0, 1, 2, 3);
+            builder.setStyle(style);
+        }
+        //if (artwork != null && isLollipop())
+        //    builder.setColor(Palette.from(artwork).generate().getVibrantColor(Color.parseColor("#403f4d")));
+        //builder.setColor(getColor(android.R.color.white));
+        Notification n = builder.build();
+
+//        if (PreferencesUtility.getInstance(this).getXPosedTrackselectorEnabled()) {
+//            addXTrackSelector(n);
+//        }
+
+        return n;
+    }
+
+    public static boolean isJellyBeanMR1() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
+    }
+
+    public static boolean isLollipop() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+
+    private void setUpMediaSession(){
+        if (isLollipop()){
+            mSession = new MediaSessionCompat(this,"Music");
+            mSession.setCallback(new MediaSessionCompat.Callback() {
+
+            });
+            mSession.setFlags(MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+            updateMediaSession();
+        }
+
+    }
+
+
+    private void updateMediaSession(){
+
+        int playState = PlaybackStateCompat.STATE_PLAYING;
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mSession.setPlaybackState(new PlaybackStateCompat.Builder()
+                    .setState(playState, 0, 1.0f)
+                    .setActions(PlaybackStateCompat.ACTION_PLAY | PlaybackStateCompat.ACTION_PAUSE | PlaybackStateCompat.ACTION_PLAY_PAUSE |
+                            PlaybackStateCompat.ACTION_SKIP_TO_NEXT | PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS)
+                    .build());
+        }
+    }
+
+
+    private void sendBigRemoteViews(){
+        BigRemoteViews brv = new BigRemoteViews(this);
+        RemoteViews rv = brv.getRemoteViews();
+
+        SmallRemoteViews srv = new SmallRemoteViews(this);
+        RemoteViews rv2 = srv.getRemoteViews();
+
+        android.support.v4.app.NotificationCompat.Builder  builder= new NotificationCompat.Builder(this);
+        builder.setSmallIcon(R.drawable.kugou_small)
+                .setContentTitle("酷狗")
+                .setContentText("歌手")
+                .setCustomBigContentView(rv)
+                .setContent(rv2);
+
+        android.app.NotificationManager nm = (android.app.NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        nm.notify(1000,builder.build());
+
+    }
+
+    private Timer timer;
+
+    private void invokeTimer(){
+        if (timer!=null){
+            timer.cancel();
+            timer = null;
+        }
+
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                DebugLog.d("fuck you baby");
+            }
+        },0,3000);
     }
 
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv"
+        />
+
+    <com.tcl.zhanglong.utils.View.wechat_address_book.IndexBar
+        android:id="@+id/indexBar"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        app:indexBarPressBackground="#39000000"
+        app:indexBarTextSize="16sp"
+        />
+
+</FrameLayout>
