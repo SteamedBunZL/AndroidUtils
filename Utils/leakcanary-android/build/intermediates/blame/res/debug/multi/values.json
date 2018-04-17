@@ -1,0 +1,275 @@
+[
+    {
+        "outputFile": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/build/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 62,
+                    "endOffset": 113
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_int.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 671,
+                        "endColumn": 60,
+                        "endOffset": 729
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 118,
+                    "endColumn": 78,
+                    "endOffset": 192
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 2,
+                        "startOffset": 743,
+                        "endColumn": 76,
+                        "endOffset": 817
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 197,
+                    "endColumn": 72,
+                    "endOffset": 265
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 2,
+                        "startOffset": 672,
+                        "endColumn": 70,
+                        "endOffset": 740
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 270,
+                    "endColumn": 55,
+                    "endOffset": 321
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 2,
+                        "startOffset": 1334,
+                        "endColumn": 53,
+                        "endOffset": 1385
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 326,
+                    "endColumn": 63,
+                    "endOffset": 385
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 29,
+                        "startColumn": 2,
+                        "startOffset": 1513,
+                        "endColumn": 61,
+                        "endOffset": 1572
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 390,
+                    "endColumn": 70,
+                    "endOffset": 456
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 2,
+                        "startOffset": 1169,
+                        "endColumn": 68,
+                        "endOffset": 1235
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 461,
+                    "endColumn": 126,
+                    "endOffset": 583
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 28,
+                        "startColumn": 2,
+                        "startOffset": 1388,
+                        "endColumn": 124,
+                        "endOffset": 1510
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 588,
+                    "endColumn": 69,
+                    "endOffset": 653
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 2,
+                        "startOffset": 820,
+                        "endColumn": 67,
+                        "endOffset": 885
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 658,
+                    "endColumn": 85,
+                    "endOffset": 739
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 2,
+                        "startOffset": 888,
+                        "endColumn": 83,
+                        "endOffset": 969
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 744,
+                    "endColumn": 73,
+                    "endOffset": 813
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 2,
+                        "startOffset": 1034,
+                        "endColumn": 71,
+                        "endOffset": 1103
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 818,
+                    "endColumn": 63,
+                    "endOffset": 877
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 2,
+                        "startOffset": 972,
+                        "endColumn": 61,
+                        "endOffset": 1031
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 882,
+                    "endColumn": 64,
+                    "endOffset": 942
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 2,
+                        "startOffset": 1106,
+                        "endColumn": 62,
+                        "endOffset": 1166
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 947,
+                    "endColumn": 97,
+                    "endOffset": 1040
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 2,
+                        "startOffset": 1238,
+                        "endColumn": 95,
+                        "endOffset": 1331
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 1045,
+                    "endLine": 16,
+                    "endColumn": 10,
+                    "endOffset": 1111
+                },
+                "from": {
+                    "file": "/Users/zhanglong/AndroidStudioProjects/github/AndroidUtils/Utils/leakcanary-android/src/main/res/values/__leak_canary_themes.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 2,
+                        "startOffset": 671,
+                        "endLine": 18,
+                        "endColumn": 10,
+                        "endOffset": 737
+                    }
+                }
+            }
+        ]
+    }
+]

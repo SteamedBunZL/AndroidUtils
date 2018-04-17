@@ -5,10 +5,6 @@ import com.tcl.zhanglong.utils.IPC_Messenger.MessengerActivity;
 import com.tcl.zhanglong.utils.activity.intentfilter.IntentfilterActivity;
 import com.tcl.zhanglong.utils.activity.launchmode.LaunchModeActivity;
 import com.tcl.zhanglong.utils.activity.ui.UIListActivity;
-import com.tcl.zhanglong.utils.data_binding.DataBindingActivity;
-import com.tcl.zhanglong.utils.data_binding.DataBingdingResouceActivity;
-import com.tcl.zhanglong.utils.databinding.ResouceBinding;
-import com.tcl.zhanglong.utils.opengl.OpenGlListActivity;
 import com.tcl.zhanglong.utils.project_pattern.ProjectPatternActivity;
 
 /**
@@ -28,8 +24,6 @@ public class FunctionListActivity extends BaseListActivity {
                 IPCActivityA.class.getName(),
                 MessengerActivity.class.getName(),
                 ProjectPatternActivity.class.getName(),
-                DataBindingActivity.class.getName(),
-                DataBingdingResouceActivity.class.getName(),
                 LiyingAcitivty.class.getName()
                 };
     }

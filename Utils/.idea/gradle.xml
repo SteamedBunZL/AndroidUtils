@@ -12,16 +12,17 @@
             <option value="$PROJECT_DIR$/DroidPluginLibrary" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/appalivedemo" />
-            <option value="$PROJECT_DIR$/ccalljava" />
             <option value="$PROJECT_DIR$/cleansdk" />
             <option value="$PROJECT_DIR$/commonlib" />
-            <option value="$PROJECT_DIR$/copycloudreader" />
             <option value="$PROJECT_DIR$/hermes" />
             <option value="$PROJECT_DIR$/hermes-eventbus" />
-            <option value="$PROJECT_DIR$/javacallc" />
+            <option value="$PROJECT_DIR$/leakcanary-analyzer" />
+            <option value="$PROJECT_DIR$/leakcanary-android" />
+            <option value="$PROJECT_DIR$/leakcanary-watcher" />
             <option value="$PROJECT_DIR$/logger" />
             <option value="$PROJECT_DIR$/lottie" />
             <option value="$PROJECT_DIR$/picasso" />
+            <option value="$PROJECT_DIR$/rx1.x" />
             <option value="$PROJECT_DIR$/shimmer-android" />
             <option value="$PROJECT_DIR$/volley" />
           </set>

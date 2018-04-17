@@ -54,12 +54,11 @@ dependencies {
     compile dep.circleimageview
     compile dep.cardview
     compile dep.design
-    compile dep.rxjava
-    compile dep.rxandroid
     provided files('libs/layoutlib.jar')
     compile project(':commonlib')
     compile project(':AVEng')
     //compile project(':cleansdk')
+//    compile project(':rx')
 
 }
 //
