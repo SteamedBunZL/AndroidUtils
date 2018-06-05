@@ -164,6 +164,8 @@
 
         <activity android:name=".View.wechat_emoji_rank.WeChatEmojiActivity"/>
 
+        <activity android:name=".dispatch_study.StudyDispatchActivity"/>
+
     </application>
 
 </manifest>

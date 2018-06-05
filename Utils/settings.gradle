@@ -1,1 +1,1 @@
-include ':app', ':picasso', ':volley', ':lottie', ':shimmer-android', ':logger', ':AVEng', ':commonlib', ':hermes', ':hermes-eventbus', ':DroidPluginLibrary', ':cleansdk', ':appalivedemo', ':leakcanary-watcher', ':leakcanary-analyzer', ':leakcanary-android', ':rx1.x'
+include ':app', ':picasso', ':volley', ':lottie', ':shimmer-android', ':logger', ':AVEng', ':commonlib', ':hermes', ':hermes-eventbus', ':DroidPluginLibrary', ':cleansdk', ':appalivedemo', ':leakcanary-watcher', ':leakcanary-analyzer', ':leakcanary-android', ':rx1.x', ':kotlin', ':snappy_db'

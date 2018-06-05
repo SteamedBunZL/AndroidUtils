@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/commonlib/commonlib.iml" filepath="$PROJECT_DIR$/commonlib/commonlib.iml" />
       <module fileurl="file://$PROJECT_DIR$/hermes/hermes.iml" filepath="$PROJECT_DIR$/hermes/hermes.iml" />
       <module fileurl="file://$PROJECT_DIR$/hermes-eventbus/hermes-eventbus.iml" filepath="$PROJECT_DIR$/hermes-eventbus/hermes-eventbus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kotlin/kotlin.iml" filepath="$PROJECT_DIR$/kotlin/kotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/leakcanary-analyzer/leakcanary-analyzer.iml" filepath="$PROJECT_DIR$/leakcanary-analyzer/leakcanary-analyzer.iml" />
       <module fileurl="file://$PROJECT_DIR$/leakcanary-android/leakcanary-android.iml" filepath="$PROJECT_DIR$/leakcanary-android/leakcanary-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/leakcanary-watcher/leakcanary-watcher.iml" filepath="$PROJECT_DIR$/leakcanary-watcher/leakcanary-watcher.iml" />
@@ -19,6 +20,7 @@
       <module fileurl="file://$PROJECT_DIR$/picasso/picasso.iml" filepath="$PROJECT_DIR$/picasso/picasso.iml" />
       <module fileurl="file://$PROJECT_DIR$/rx1.x/rx1.x.iml" filepath="$PROJECT_DIR$/rx1.x/rx1.x.iml" />
       <module fileurl="file://$PROJECT_DIR$/shimmer-android/shimmer-android.iml" filepath="$PROJECT_DIR$/shimmer-android/shimmer-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/snappy_db/snappy_db.iml" filepath="$PROJECT_DIR$/snappy_db/snappy_db.iml" />
       <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
     </modules>
   </component>

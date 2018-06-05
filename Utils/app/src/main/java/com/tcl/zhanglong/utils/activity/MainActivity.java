@@ -33,6 +33,7 @@ import com.tcl.zhanglong.utils.R;
 import com.tcl.zhanglong.utils.Utils.VibratorUtils;
 import com.tcl.zhanglong.utils.View.wechat_address_book.WeChatActivity;
 import com.tcl.zhanglong.utils.View.wechat_emoji_rank.WeChatEmojiActivity;
+import com.tcl.zhanglong.utils.dispatch_study.StudyDispatchActivity;
 import com.tcl.zhanglong.utils.jni.JNI;
 import com.tcl.zhanglong.utils.notification.AnotherColorEngine;
 import com.tcl.zhanglong.utils.notification.BigRemoteViews;
@@ -213,7 +214,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 //nm.notify(1001,buildNotification());
                 //sendBigRemoteViews();
 
-                invokeTimer();
+                //invokeTimer();
+                startActivity(new Intent(MainActivity.this, StudyDispatchActivity.class));
                 break;
             case R.id.button3:
                 //getAndroidId();

@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/commonlib" />
             <option value="$PROJECT_DIR$/hermes" />
             <option value="$PROJECT_DIR$/hermes-eventbus" />
+            <option value="$PROJECT_DIR$/kotlin" />
             <option value="$PROJECT_DIR$/leakcanary-analyzer" />
             <option value="$PROJECT_DIR$/leakcanary-android" />
             <option value="$PROJECT_DIR$/leakcanary-watcher" />
@@ -24,6 +25,7 @@
             <option value="$PROJECT_DIR$/picasso" />
             <option value="$PROJECT_DIR$/rx1.x" />
             <option value="$PROJECT_DIR$/shimmer-android" />
+            <option value="$PROJECT_DIR$/snappy_db" />
             <option value="$PROJECT_DIR$/volley" />
           </set>
         </option>
